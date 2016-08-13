@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Crazy Dave&#39;s InterTube Emporium</title>
+  <subtitle>where stuff goes to the corner</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://dbheise.github.io/"/>
+  <updated>2016-08-13T17:30:59.548Z</updated>
+  <id>https://dbheise.github.io/</id>
+  
+  <author>
+    <name>Crazy Dave</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>first</title>
+    <link href="https://dbheise.github.io/2016/08/13/first/"/>
+    <id>https://dbheise.github.io/2016/08/13/first/</id>
+    <published>2016-08-13T13:29:53.000Z</published>
+    <updated>2016-08-13T17:30:59.548Z</updated>
+    
+    <content type="html"><![CDATA[<p>so i’m trying to start to blog again…not because I want to talk, but because I want one consistant place to put everything…</p>
+<p>we’ll see how it goes!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;so i’m trying to start to blog again…not because I want to talk, but because I want one consistant place to put everything…&lt;/p&gt;
+&lt;p&gt;we’ll 
+    
+    </summary>
+    
+    
+      <category term="obligitory" scheme="https://dbheise.github.io/tags/obligitory/"/>
+    
+  </entry>
+  
+</feed>
