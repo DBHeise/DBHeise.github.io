@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dbheise.github.io/"/>
-  <updated>2016-08-15T17:30:54.323Z</updated>
+  <updated>2016-08-15T18:39:55.617Z</updated>
   <id>https://dbheise.github.io/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2016 Palo Alto Labyrenth CTF Doc 02</title>
+    <link href="https://dbheise.github.io/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/"/>
+    <id>https://dbheise.github.io/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/</id>
+    <published>2016-08-15T13:33:34.000Z</published>
+    <updated>2016-08-15T18:39:55.617Z</updated>
+    
+    <content type="html"><![CDATA[<p>So we solved the frist document and then they give us this…Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E)</p>
+<p>So again, run it through <a href="https://github.com/DBHeise/fileid" target="_blank" rel="external">FileId</a> tool and get the VBA code out (using the XML or JSON output options).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Sub AutoOpen()</div><div class="line">&apos;</div><div class="line">&apos; crackme Macro</div><div class="line">&apos;</div><div class="line">&apos;</div><div class="line">    UserForm1.Show</div><div class="line">End Sub</div></pre></td></tr></table></figure>
+<p>and<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">Private Sub button_Click()</div><div class="line">    x = suchcrypto(key.Text, &quot;General Vidal&quot;)</div><div class="line">    If x = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot; Then</div><div class="line">        MsgBox &quot;Wow. Good Job! Such crack.&quot;</div><div class="line">    Else</div><div class="line">        MsgBox &quot;U can do. Try harder...&quot;</div><div class="line">    End If</div><div class="line">End Sub</div><div class="line"></div><div class="line">Function suchcrypto(sMessage, strKey)</div><div class="line">    Dim kLen, x, y, i, j, temp</div><div class="line">    Dim s(256), k(256)</div><div class="line">    kLen = Len(strKey)</div><div class="line">    For i = 0 To 255</div><div class="line">        s(i) = i</div><div class="line">        k(i) = Asc(Mid(strKey, (i Mod kLen) + 1, 1))</div><div class="line">    Next</div><div class="line">    j = 0</div><div class="line">    For i = 0 To 255</div><div class="line">        j = (j + k(i) + s(i)) Mod 256</div><div class="line">        temp = s(i)</div><div class="line">        s(i) = s(j)</div><div class="line">        s(j) = temp</div><div class="line">    Next</div><div class="line">    x = 0</div><div class="line">    y = 0</div><div class="line">    For i = 1 To 3072</div><div class="line">        x = (x + 1) Mod 256</div><div class="line">        y = (y + s(x)) Mod 256</div><div class="line">        temp = s(x)</div><div class="line">        s(x) = s(y)</div><div class="line">        s(y) = temp</div><div class="line">    Next</div><div class="line">    For i = 1 To Len(sMessage)</div><div class="line">        x = (x + 1) Mod 256</div><div class="line">        y = (y + s(x)) Mod 256</div><div class="line">        temp = s(x)</div><div class="line">        s(x) = s(y)</div><div class="line">        s(y) = temp</div><div class="line"> </div><div class="line">        suchcrypto = suchcrypto &amp; (s((s(x) + s(y)) Mod 256) Xor Asc(Mid(sMessage, i, 1))) &amp; &quot;,&quot;</div><div class="line">    Next</div><div class="line">End Function</div></pre></td></tr></table></figure></p>
+<p>ok, so we show a form, get user input and then run the “<code>button_Click</code>“ subroutine…but look, we know what the answer should be when we read the IF statement. So basic algebra here…we know one of the two inputs, we have the function, and we know the output….we can brute force…</p>
+<p>ugh, brute forcing…and in VBA…ok if I have to…<em>sigh</em>. In retrospect, I can think of several other ways to attack this “crypto” other than brute forcing, but that’s what I did in the moment.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Sub BruteEnForcer()</div><div class="line">    ans = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot;</div><div class="line">    k = &quot;General Vidal&quot;</div><div class="line"></div><div class="line">    msg = &quot;&quot;</div><div class="line">    Do</div><div class="line">    </div><div class="line">    Loop Until suchcrypto(msg, k) = ans</div><div class="line"></div><div class="line">End Sub</div></pre></td></tr></table></figure></p>
+<p>ok, so now we have a simple logic/programming problem. We know what the result will be, but how can we figure out what the msg variable should be. How do we know when we are even close…are we going to iterate over all possible typable strings until we find a match? No, well we could, but no just no. You’ll notice there are a bunch of comma’s in the ‘answer’ string and based on the ‘decyption’ code it appends a comma after iterating over each letter in the message. So lets make that answer an array and go character by character until we get matches. I’m also going to limit it to alphanumeric characters, unless that doesn’t work. I would post by brute forcing code that I used, but I didn’t save it…so here’s some code that <em>might</em> work:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Sub BruteEnForcer()</div><div class="line">    ans = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot;</div><div class="line">    k = &quot;General Vidal&quot;</div><div class="line">    </div><div class="line">    ansArry = Split(ans, &quot;,&quot;)</div><div class="line">    </div><div class="line">    msg = &quot;&quot;</div><div class="line">    leng = 1</div><div class="line">    Do</div><div class="line">        For i = 32 To 126</div><div class="line">            tmpMsg = msg + Chr(i)</div><div class="line">            tmp = Split(suchcrypto(tmpMsg, k), &quot;,&quot;)</div><div class="line">            If tmp(leng) = ansArry(leng) Then</div><div class="line">                msg = tmpMsg</div><div class="line">                leng = leng + 1</div><div class="line">                Exit For</div><div class="line">            End If</div><div class="line">        Next i</div><div class="line">    Loop Until suchcrypto(msg, k) = ans</div><div class="line">    MsgBox msg</div><div class="line">End Sub</div></pre></td></tr></table></figure></p>
+<p>which when run gives us the following output:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PAN&#123;L4$t_Night_@f@iry_Vizited_M3&#125;</div></pre></td></tr></table></figure></p>
+<p>gee that looks like it might be it…</p>
+<p>BOOM</p>
+<p>and we move on to doc #3</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;So we solved the frist document and then they give us this…Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79
+    
+    </summary>
+    
+    
+      <category term="security" scheme="https://dbheise.github.io/tags/security/"/>
+    
+      <category term="CTF" scheme="https://dbheise.github.io/tags/CTF/"/>
+    
+      <category term="maldoc" scheme="https://dbheise.github.io/tags/maldoc/"/>
+    
+      <category term="Labyrenth" scheme="https://dbheise.github.io/tags/Labyrenth/"/>
+    
+  </entry>
   
   <entry>
     <title>2016 Palo Alto Labyrenth CTF - Doc 01</title>
