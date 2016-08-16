@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2016 Palo Alto Labyrenth CTF Doc 05 | Crazy Dave&#39;s InterTube Emporium</title>
+  <meta name="author" content="Crazy Dave">
+  
+  <meta name="description" content="DOC 01
+DOC 02
+DOC 03
+DOC 04
+DOC 05 &amp;lt;- You are here
+
+Again the fifth challenge is a zip file: 01E1B7BCFB39B4A666475991AF11C5762A489F9395C48B4E156526">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="2016 Palo Alto Labyrenth CTF Doc 05"/>
+  <meta property="og:site_name" content="Crazy Dave&#39;s InterTube Emporium"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Crazy Dave&#39;s InterTube Emporium" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/cyborg.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Crazy Dave&#39;s InterTube Emporium</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 2016 Palo Alto Labyrenth CTF Doc 05</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a> &lt;- You are here</li>
+</ul>
+<p>Again the fifth challenge is a zip file: <a href="/data/PAN_CTF_DOCTrack_005.zip">01E1B7BCFB39B4A666475991AF11C5762A489F9395C48B4E156526E1C6E4573F</a></p>
+<p>But I have to first admit that I solved this one third, not fifth…in fact I got a message when I tried to submit the fifth challenge solution early that I had to do them in order. How did I do them out of order you ask? well remember in the very first document there was an extra <code>.7z</code> file inside the zip. This was a 7Zip archive that contained ALL of the challenges (go look for yourself).</p>
+<p>So running it through <a href="https://github.com/DBHeise/fileid" target="_blank" rel="external">FileId</a> showed only a little bit of macros:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Sub excelulate()</div><div class="line"></div><div class="line">    Application.Quit</div><div class="line"></div><div class="line">End Sub</div></pre></td></tr></table></figure></p>
+<p>So I crack the file open in Microsoft Excel….hmmm its only asking for a value and a button. You click the button and it says you stink and opens calc.exe. Wait what? there’s no macro’s how is this happening? So I open the file in eDoc. What is eDoc you say? its a GUI application for looking at the streams and folders inside an Ole Structured Storage container. I don’t have a link for it as the company that produced it no longer exists, but I still have the binary…besides a very similar tool is <a href="http://www.mitec.cz/ssv.html" target="_blank" rel="external">SSView</a> by MiTec (in fact is in many ways better…but eDoc lets me search for hex/ascii values and do inline editing).</p>
+<p>So perusing through the hex view of the <code>Workbook</code> stream (i.e. where the actual workbooks live) we can easily see calc.exe (around stream offset 0x5b90 as well as other places) and several other strings that were NOT on the three sheets when we opened Excel eariler….HIDDEN SHEETS.</p>
+<p>So open up excel, right click on and of the sheet names and click <code>unhide</code>…a little dialog opens up and we can unhide the <code>secret</code> sheet. But wait it looks empty. So we start looking through the formula values and eventually you will find cell A14 with this formula:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=IF(RUN(supersecret!F13))</div></pre></td></tr></table></figure></p>
+<p>So here you need to know excel forumlas and you will see that the notation they’re using shows there is ANOTHER hidden sheet. what? how can this be you ask? well turns out that excel has something called a VeryHidden sheet (see <a href="https://support.microsoft.com/en-us/kb/213609" target="_blank" rel="external">KB213609</a>, or just search the InterTubes yourself)</p>
+<p>Hmmm, so how do we unhide a very hidden sheet? well just fix it in VBA. So there’s already a function <code>excelulate</code> so I simply changed it to:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Sub excelulate()</div><div class="line">    ActiveWorkbook.Sheets(&quot;supersecret&quot;).Visible = True</div><div class="line">End Sub</div></pre></td></tr></table></figure>
+<p>and then run it!</p>
+<p>so we look at the newly discovered sheet and we find the crazy formula in F13:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=RETURN(EXACT(CONCATENATE(D7,A5,C5,B4,E20,B6,A8,B8,A12,B10,E10,C9,B13,D12,C11,B16,A25,A18,B19,C20,B21,B2,D23,B24,E4,B26,D16,A21,C14,A16),Sheet1!B3))</div></pre></td></tr></table></figure></p>
+<p>So I copy this into another cell in the same sheet, but modifiy at so:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=CONCATENATE(D7,A5,C5,B4,E20,B6,A8,B8,A12,B10,E10,C9,B13,D12,C11,B16,A25,A18,B19,C20,B21,B2,D23,B24,E4,B26,D16,A21,C14,A16)</div></pre></td></tr></table></figure></p>
+<p>but wait it doesn’t run it! this sheet is showing the forumlas instead of running them. No problem, I go back to the <code>Sheet1</code> sheet and pick an empty cell and enter the formula:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">=supersecret!F16</div></pre></td></tr></table></figure></p>
+<p>and poof! we have this value:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PAN&#123;Exc3l4=3x7r3me1y4An7a5+!c&#125;</div></pre></td></tr></table></figure></p>
+<p>we enter it into the CTF dialog</p>
+<p>BOOM</p>
+<p>completed!</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-08-15 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/security/">security<span>5</span></a></li> <li><a href="/tags/CTF/">CTF<span>5</span></a></li> <li><a href="/tags/maldoc/">maldoc<span>5</span></a></li> <li><a href="/tags/Labyrenth/">Labyrenth<span>5</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Crazy Dave
+     
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

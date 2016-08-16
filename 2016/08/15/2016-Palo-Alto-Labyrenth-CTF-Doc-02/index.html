@@ -6,8 +6,13 @@
   <title>2016 Palo Alto Labyrenth CTF Doc 02 | Crazy Dave&#39;s InterTube Emporium</title>
   <meta name="author" content="Crazy Dave">
   
-  <meta name="description" content="So we solved the frist document and then they give us this…Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E)
-So aga">
+  <meta name="description" content="DOC 01
+DOC 02 &amp;lt;- You are here
+DOC 03
+DOC 04
+DOC 05 
+
+So we solved the frist document and then they give us this…Document #2 (hash: ACCDF64EB1E96BE5">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -114,7 +119,14 @@ So aga">
 	<div class="mypage">		
 	  		
 
-	  <p>So we solved the frist document and then they give us this…Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E)</p>
+	  <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a> </li>
+</ul>
+<p>So we solved the frist document and then they give us this…Document #2 (hash: <a href="/data/PAN_CTF_DOCTrack_002.zip">ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E</a>)</p>
 <p>So again, run it through <a href="https://github.com/DBHeise/fileid" target="_blank" rel="external">FileId</a> tool and get the VBA code out (using the XML or JSON output options).</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Sub AutoOpen()</div><div class="line">&apos;</div><div class="line">&apos; crackme Macro</div><div class="line">&apos;</div><div class="line">&apos;</div><div class="line">    UserForm1.Show</div><div class="line">End Sub</div></pre></td></tr></table></figure>
 <p>and<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">Private Sub button_Click()</div><div class="line">    x = suchcrypto(key.Text, &quot;General Vidal&quot;)</div><div class="line">    If x = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot; Then</div><div class="line">        MsgBox &quot;Wow. Good Job! Such crack.&quot;</div><div class="line">    Else</div><div class="line">        MsgBox &quot;U can do. Try harder...&quot;</div><div class="line">    End If</div><div class="line">End Sub</div><div class="line"></div><div class="line">Function suchcrypto(sMessage, strKey)</div><div class="line">    Dim kLen, x, y, i, j, temp</div><div class="line">    Dim s(256), k(256)</div><div class="line">    kLen = Len(strKey)</div><div class="line">    For i = 0 To 255</div><div class="line">        s(i) = i</div><div class="line">        k(i) = Asc(Mid(strKey, (i Mod kLen) + 1, 1))</div><div class="line">    Next</div><div class="line">    j = 0</div><div class="line">    For i = 0 To 255</div><div class="line">        j = (j + k(i) + s(i)) Mod 256</div><div class="line">        temp = s(i)</div><div class="line">        s(i) = s(j)</div><div class="line">        s(j) = temp</div><div class="line">    Next</div><div class="line">    x = 0</div><div class="line">    y = 0</div><div class="line">    For i = 1 To 3072</div><div class="line">        x = (x + 1) Mod 256</div><div class="line">        y = (y + s(x)) Mod 256</div><div class="line">        temp = s(x)</div><div class="line">        s(x) = s(y)</div><div class="line">        s(y) = temp</div><div class="line">    Next</div><div class="line">    For i = 1 To Len(sMessage)</div><div class="line">        x = (x + 1) Mod 256</div><div class="line">        y = (y + s(x)) Mod 256</div><div class="line">        temp = s(x)</div><div class="line">        s(x) = s(y)</div><div class="line">        s(y) = temp</div><div class="line"> </div><div class="line">        suchcrypto = suchcrypto &amp; (s((s(x) + s(y)) Mod 256) Xor Asc(Mid(sMessage, i, 1))) &amp; &quot;,&quot;</div><div class="line">    Next</div><div class="line">End Function</div></pre></td></tr></table></figure></p>
@@ -133,9 +145,9 @@ So aga">
 	<div class="pagination">
 <ul class="pagination">
 	 
-		
-          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
-        
+				
+    	<li class="prev"><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+  		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
@@ -188,7 +200,7 @@ So aga">
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/security/">security<span>2</span></a></li> <li><a href="/tags/CTF/">CTF<span>2</span></a></li> <li><a href="/tags/maldoc/">maldoc<span>2</span></a></li> <li><a href="/tags/Labyrenth/">Labyrenth<span>2</span></a></li>
+  <li><a href="/tags/security/">security<span>5</span></a></li> <li><a href="/tags/CTF/">CTF<span>5</span></a></li> <li><a href="/tags/maldoc/">maldoc<span>5</span></a></li> <li><a href="/tags/Labyrenth/">Labyrenth<span>5</span></a></li>
     </ul>
 	</div>
 		
