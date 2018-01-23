@@ -6,7 +6,12 @@
     <entry>
       <title><![CDATA[New HTML Experiments]]></title>
       <url>https://dbheise.github.io/2018/01/22/New-HTML-Experiments/</url>
-      <content type="html"></content>
+      <content type="html"><![CDATA[<p>So I’ve recently had a few automation random ideas. The problem was that it was such a small automation and I wanted it to be useable anywhere, so I wrote it in a single HTML page and the code is in Javascript.</p>
+<ul>
+<li><a href="/projects/svgpath.html">SVG Path Cleaner</a> - changes all the numbers in a SVG path to be decimal (i.e. rounds the number)</li>
+<li><a href="/projects/randompath.html">Random SVG Page</a> - creates a small random SVG path</li>
+</ul>
+]]></content>
       
         
     </entry>
@@ -29,8 +34,27 @@
 </ul>
 <p>but nowadays I don’t download screen savers unless I can compile from source…</p>
 <p>anyways, at one time I attempted to create my own in VB (why VB…well that’s a post in itself) based on the Space Combat screen saver, but I didn’t have fancy graphics. So I used basic sprites and freely available images found on various corners of the InterTubes:</p>
-<p>&lt;% image_tag(“/data/images/bismark/AGX-04.png”, { alt: “AGX-04”, class:”nowrap”}) %&gt;</p>
-<p><img src="/data/images/bismark/AGX-04.png" alt="AGX-04"><br><img src="/data/images/bismark/Deathstar.png" alt="Deathstar"><br><img src="/data/images/bismark/Easter Bunny.png" alt="Easter Bunny"><br><img src="/data/images/bismark/Ghost 2.png" alt="Ghost 2"><br><img src="/data/images/bismark/H2o.png" alt="H2o"><br><img src="/data/images/bismark/Happy Face.png" alt="Happy Face"><br><img src="/data/images/bismark/Hitchhiker&#39;s Guy.png" alt="Hitchhiker&#39;s Guy"><br><img src="/data/images/bismark/LOMPSTER.png" alt="LOMPSTER"><br><img src="/data/images/bismark/M Falcon.png" alt="M Falcon"><br><img src="/data/images/bismark/MA-04X.png" alt="MA-04X"><br><img src="/data/images/bismark/Pac Ghost.png" alt="Pac Ghost"><br><img src="/data/images/bismark/Radish.png" alt="Radish"><br><img src="/data/images/bismark/RB-79.png" alt="RB-79"><br><img src="/data/images/bismark/Slave 1.png" alt="Slave 1"><br><img src="/data/images/bismark/Space Ship.png" alt="Space Ship"><br><img src="/data/images/bismark/Sunburst.png" alt="Sunburst"><br><span class="glyphicon glyphicon-thumbs-up"></span></p>
+
+<table><tr>
+<td><img alt="AGX-04" src="/data/images/bismark/AGX-04.png"></td>
+<td><img alt="Deathstar" src="/data/images/bismark/Deathstar.png"></td>
+<td><img alt="Easter Bunny" src="/data/images/bismark/Easter Bunny.png"></td>
+<td><img alt="Ghost 2" src="/data/images/bismark/Ghost 2.png"></td>
+<td><img alt="H2o" src="/data/images/bismark/H2o.png"></td>
+<td><img alt="Happy Face" src="/data/images/bismark/Happy Face.png"></td>
+<td><img alt="Hitchhiker's Guy" src="/data/images/bismark/Hitchhiker's Guy.png"></td>
+<td><img alt="LOMPSTER" src="/data/images/bismark/LOMPSTER.png"></td>
+<td><img alt="M Falcon" src="/data/images/bismark/M Falcon.png"></td>
+<td><img alt="MA-04X" src="/data/images/bismark/MA-04X.png"></td>
+<td><img alt="Pac Ghost" src="/data/images/bismark/Pac Ghost.png"></td>
+<td><img alt="Radish" src="/data/images/bismark/Radish.png"></td>
+<td><img alt="RB-79" src="/data/images/bismark/RB-79.png"></td>
+<td><img alt="Slave 1" src="/data/images/bismark/Slave 1.png"></td>
+<td><img alt="Space Ship" src="/data/images/bismark/Space Ship.png"></td>
+<td><img alt="Sunburst" src="/data/images/bismark/Sunburst.png"></td>
+</tr></table>
+
+<p>If you want to take a look you can <a href="/data/Bismark.zip">download it</a>, or <a href="/data/Bismark.7z">with the VB source</a></p>
 ]]></content>
       
         

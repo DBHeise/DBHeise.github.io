@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Crazy Dave&#39;s InterTube Emporium</title>
+  <meta name="author" content="Crazy Dave">
+  
+  <meta name="description" content="SVG Path Rounder
+    
+        div {
+            padding: 0.5%;
+            margin: 0.5%;
+        }
+        label {
+            display: block;
+       ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Crazy Dave&#39;s InterTube Emporium"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Crazy Dave&#39;s InterTube Emporium" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/cyborg.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Crazy Dave&#39;s InterTube Emporium</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/projects" title="Past, Present, and Future Projects">
+			  <i class="folder"></i>Projects
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> </h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row page">
+	<!-- cols -->
+	
+	<div class="col-md-12">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>SVG Path Rounder</title>
+    <style>
+        div {
+            padding: 0.5%;
+            margin: 0.5%;
+        }
+        label {
+            display: block;
+        }
+        .svgbox {
+            min-width: 47%;
+            max-width: 48%;
+            background-color: #bbbbbb;
+            display: inline-block;
+            border-style: solid;
+            border-width: 1px;
+        }
+    </style>
+    <script>
+        var cmdList = new Array("m", "M", "z", "Z", "l", "L", "h", "H", "v", "V", "c", "C", "s", "S", "q", "Q", "t", "T", "a", "A", "r", "R", "b", "B")
+        var numChars = new Array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "e", "E", "+", "-")
+        var svgPath = null
+        var result = null
+        var oldPath = null
+        var newPath = null
+
+        document.addEventListener('DOMContentLoaded', function () {
+            svgPath = document.getElementById("svgpath")
+            result = document.getElementById("result")
+            oldPath = document.getElementById("pathOrig")
+            newPath = document.getElementById("pathNew")
+        })
+
+        function cleararea(e) {
+            svgPath.value = ''
+            result.value = ''
+        }
+
+        function isCommandChar(chr) {
+            return cmdList.indexOf(chr) > -1
+        }
+        function isPartOfNumber(chr) {
+            return numChars.indexOf(chr) > -1
+        }
+        function simplify(e) {
+            oldPath.setAttribute('d', svgPath.value)
+            var path = Array.from(svgPath.value)
+            var commands = new Array();
+            var currentCommand = "";
+            var currentDigit = "";
+            for (var i = 0; i < path.length; i++) {
+                var c = path[i];
+                if (isCommandChar(c)) {
+                    commands.push(currentCommand);
+                    currentCommand = c;
+                } else {
+                    if (isPartOfNumber(c)) {
+                        currentDigit += c;
+                    } else {
+                        if (currentDigit != "") {
+                            currentCommand += Math.round(Number(currentDigit))
+                            currentDigit = ""
+                        }
+                        currentCommand += c;
+                    }
+                }
+            }
+            if (currentDigit.length > 0) {
+                currentCommand += Math.round(Number(currentDigit))
+            }
+            commands.push(currentCommand)
+            newPath.setAttribute('d', commands.join(' '))
+            result.value = commands.join('\n')
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <div>
+            <label for="svgpath">SVG Path</label>
+            <textarea id="svgpath" rows="14" style="min-width: 100%"></textarea>
+        </div>
+        <div role="group" area-label="Actions" style="padding-bottom: 25px;text-align: center;">
+            <button onclick="simplify(this)">Simplificationatorize</button>
+            <button onclick="cleararea(this)">Clear</button>
+        </div>
+    </div>
+    <div>
+        <label for="result">New SVG Path</label>
+        <textarea id="result" rows="14" disabled style="min-width: 100%"></textarea>
+    </div>
+    <div style="text-align:center;margin: auto 1.5em;">
+        <div class="svgbox">
+            <label>Old Path</label>
+            <svg version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg">
+                <path id="pathOrig" d="" fill="none" stroke="#0" stroke-width=".5px"/>
+            </svg>
+        </div>
+        <div class="svgbox">
+            <label>New Path</label>
+            <svg version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg">
+                <path id="pathNew" d="" fill="none" stroke="#0" stroke-width=".5px"/>
+            </svg>
+        </div>
+    </div>
+</body>
+
+</html>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+	
+	<!-- comment -->
+	
+	</div> <!-- col-md-9/col-md-12 -->
+		
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2018 Crazy Dave
+     
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
