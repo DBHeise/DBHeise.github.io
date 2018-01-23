@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dbheise.github.io/"/>
-  <updated>2018-01-23T18:44:50.399Z</updated>
+  <updated>2018-01-23T20:07:55.590Z</updated>
   <id>https://dbheise.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://dbheise.github.io/2018/01/22/New-HTML-Experiments/"/>
     <id>https://dbheise.github.io/2018/01/22/New-HTML-Experiments/</id>
     <published>2018-01-22T15:23:36.000Z</published>
-    <updated>2018-01-23T18:44:50.399Z</updated>
+    <updated>2018-01-23T20:07:55.590Z</updated>
     
     <content type="html"><![CDATA[<p>So I’ve recently had a few automation random ideas. The problem was that it was such a small automation and I wanted it to be useable anywhere, so I wrote it in a single HTML page and the code is in Javascript.</p><ul><li><a href="/projects/svgpath.html">SVG Path Cleaner</a> - changes all the numbers in a SVG path to be decimal (i.e. rounds the number)</li><li><a href="/projects/randompath.html">Random SVG Page</a> - creates a small random SVG path</li></ul>]]></content>
     
@@ -34,6 +34,8 @@
     
     </summary>
     
+    
+      <category term="SVG" scheme="https://dbheise.github.io/tags/SVG/"/>
     
   </entry>
   
