@@ -120,6 +120,48 @@
 	<!-- display as entry -->	
 		<h3 class="title">
 			<div class="date"> 2016-08-15 </div>
+			<div class="article-title"><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/" >2016 Palo Alto Labyrenth CTF Doc 03</a></div>						
+		</h3>
+	
+
+
+			  <div class="entry">
+  <div class="row">
+	
+	
+		<ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a> </li>
+</ul>
+<p>So we get the third zip file which contains file named “gooby.pdf” (hash:<a href="/data/PAN_CTF_DOCTrack_002.zip">3FB332A27A28AF95187F45D79EC8A08ADEF1A4AAD0D4DDD26B832A15CE9DB91A</a>). Well now we need to turn to PDF tools.</p>
+<p>I admit that I’m not as well versed with the internal structures of PDF’s as I am with Office Documents, but their structure is also simplier. So I first tried <a href="https://github.com/dzzie/pdfstreamdumper" target="_blank" rel="noopener">PDFStreamDumper</a> by David Zimmer, but it didn’t see the javascript intially. Then I tried <a href="http://eternal-todo.com/tools/peepdf-pdf-analysis-tool" target="_blank" rel="noopener">peepdf</a>, but again it didn’t get what I needed intially, then I tried the interactive mode and ignoring errors flags:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python peepdf.py -f -l -i goody.pdf</span><br></pre></td></tr></table></figure></p>
+<p>So peepdf loads the file, and shows some “stuff”:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">File: gooby.pdf</span><br><span class="line">MD5: 92b562e12560591699e37b6c2533c191</span><br><span class="line">SHA1: ca2250317e4d07a6096282035275256896bcdb2e</span><br><span class="line">SHA256: f575fc6580c192088d60bed8be1791eaa7e5c625331d7c67683f5efb59551247</span><br><span class="line">Size: 119412 bytes</span><br><span class="line">Version: 1.7</span><br><span class="line">Binary: True</span><br><span class="line">Linearized: False</span><br><span class="line">Encrypted: False</span><br><span class="line">Updates: 0</span><br><span class="line">Objects: 11</span><br><span class="line">Streams: 7</span><br><span class="line">URIs: 0</span><br><span class="line">Comments: 0</span><br><span class="line">Errors: 3</span><br><span class="line"></span><br><span class="line">Version 0:</span><br><span class="line">        Catalog: 2</span><br><span class="line">        Info: 4</span><br><span class="line">        Objects (11): [6, 8, 9, 10, 11, 12, 13, 14, 15]</span><br><span class="line">        Streams (7): [11, 12, 13, 14, 15, 9, 12]</span><br><span class="line">                Xref streams (1): [15]</span><br><span class="line">                Encoded (7): [11, 12, 13, 14, 15, 9, 12]</span><br><span class="line">        Objects with JS code (1): [11]</span><br><span class="line">        Suspicious elements:</span><br><span class="line">                /AA (1): [6]</span><br><span class="line">                /JS (1): [11]</span><br><span class="line">                /JavaScript (1): [11]</span><br></pre></td></tr></table></figure></p>
+<p>so based on this output it looks like object #11 has some javascript, so I type:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object 11</span><br></pre></td></tr></table></figure></p>
+<p>and get:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">var asdf = &quot;NuemnaufOmt8wek4obWeashiMeivanJeatt6&quot;;</span><br><span class="line">var ddas =  &quot;bodcuicMong2&quot;;</span><br><span class="line">var dda22d = &quot;bosOjparj1&quot;</span><br><span class="line">var obGeujRiary = &quot;akPatMyib5EbJetEteip9idWoncainil7&quot;</span><br><span class="line"></span><br><span class="line">function Iadghod3(s) &#123;</span><br><span class="line">  var v = 0;</span><br><span class="line">  for (var i=0; i&lt;4; i++) v |= s.charCodeAt(i) &lt;&lt; i*8;</span><br><span class="line">  return isNaN(v) ? 0 : v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Vonsheac6(v) &#123;</span><br><span class="line">  var s = String.fromCharCode(v &amp; 0xFF, v&gt;&gt;8 &amp; 0xFF, v&gt;&gt;16 &amp; 0xFF, v&gt;&gt;24 &amp; 0xFF)</span><br><span class="line">;</span><br><span class="line">  return s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function RevUfPhas2(DepKacyuv7, ClashJit0) &#123;</span><br><span class="line">  var v = new Array(2), k = new Array(4), s = &quot;&quot;, i;</span><br><span class="line">  DepKacyuv7 = escape(DepKacyuv7);</span><br><span class="line">  for (var i=0; i&lt;4; i++) k[i] = Iadghod3(ClashJit0.slice(i*4,(i+1)*4));</span><br><span class="line"></span><br><span class="line">  for (i=0; i&lt;DepKacyuv7.length; i+=8) &#123;</span><br><span class="line">    v[0] = Iadghod3(DepKacyuv7.slice(i,i+4));</span><br><span class="line">    v[1] = Iadghod3(DepKacyuv7.slice(i+4,i+8));</span><br><span class="line">    DikVivec2(v, k);</span><br><span class="line">    s += Vonsheac6(v[0]) + Vonsheac6(v[1]);</span><br><span class="line">  &#125;</span><br><span class="line">  return s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function jiUteFraj8(tydAcFod3, ClashJit0) &#123;</span><br><span class="line">  var v = new Array(2), k = new Array(4), s = &quot;&quot;, i;</span><br><span class="line"></span><br><span class="line">  for (var i=0; i&lt;4; i++) k[i] = Iadghod3(ClashJit0.slice(i*4,(i+1)*4));</span><br><span class="line"></span><br><span class="line">  tydAcFod3 = tydAcFod3;</span><br><span class="line">  for (i=0; i&lt;tydAcFod3.length; i+=8) &#123;</span><br><span class="line">    v[0] = Iadghod3(tydAcFod3.slice(i,i+4));</span><br><span class="line">    v[1] = Iadghod3(tydAcFod3.slice(i+4,i+8));</span><br><span class="line">    AdCejMod9(v, k);</span><br><span class="line">    s += Vonsheac6(v[0]) + Vonsheac6(v[1]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  s = s.replace(/ +$/, &apos;&apos;);</span><br><span class="line"></span><br><span class="line">  return unescape(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function DikVivec2(v, k) &#123;</span><br><span class="line"></span><br><span class="line">  var y = v[0], z = v[1];</span><br><span class="line">  var delta = 0x9E3779B9, limit = delta*32, sum = 0;</span><br><span class="line"></span><br><span class="line">  while (sum != limit) &#123;</span><br><span class="line">    y += (z&lt;&lt;4 ^ z&gt;&gt;&gt;5)+z ^ sum+k[sum &amp; 3];</span><br><span class="line">    sum += delta;</span><br><span class="line">    z += (y&lt;&lt;4 ^ y&gt;&gt;&gt;5)+y ^ sum+k[sum&gt;&gt;&gt;11 &amp; 3];</span><br><span class="line">  &#125;</span><br><span class="line">  v[0] = y; v[1] = z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function AdCejMod9(v, k) &#123;</span><br><span class="line">  var y = v[0], z = v[1];</span><br><span class="line">  var delta = 0x9E3779B9, sum = delta*32;</span><br><span class="line"></span><br><span class="line">  while (sum != 0) &#123;</span><br><span class="line">    z -= (y&lt;&lt;4 ^ y&gt;&gt;&gt;5)+y ^ sum+k[sum&gt;&gt;&gt;11 &amp; 3];</span><br><span class="line">    sum -= delta;</span><br><span class="line">    y -= (z&lt;&lt;4 ^ z&gt;&gt;&gt;5)+z ^ sum+k[sum &amp; 3];</span><br><span class="line">  &#125;</span><br><span class="line">  v[0] = y; v[1] = z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var atkopNersiv4 = RevUfPhas2(asdf, ddas);</span><br><span class="line">var fakCapFod9 = jiUteFraj8(ddas, obGeujRiary)</span><br><span class="line"></span><br><span class="line">var arnUftad4 = 0x41;</span><br><span class="line">ItOvyof7 = &quot;)5512&#123;nn666o8.454#$o\&quot;.,n6 5\&quot;)~7|%\x106u6x\x16&amp;\x19\&quot;\x10&quot;;</span><br><span class="line">var plain = &quot;&quot;;</span><br><span class="line">for (i = 0; i &lt; ItOvyof7.length; i+=1)&#123;</span><br><span class="line">    plain += String.fromCharCode(ItOvyof7.charCodeAt(i) ^ arnUftad4);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>so I fired up <a href="https://nodejs.org/" target="_blank" rel="noopener">NodeJS</a> and blindly run the javascript (tee hee hee). Of course nothing actually happens, but we can examine some varaibles…and the last variable output to the screen <code>plain</code> is a url: <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code> which is a nice RickRoll. But lets look at what are the values of the other variables, in a nodeJS REPL we simply type: <code>GLOBAL</code> and we get (relevant only):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  asdf: &apos;NuemnaufOmt8wek4obWeashiMeivanJeatt6&apos;,</span><br><span class="line">  ddas: &apos;bodcuicMong2&apos;,</span><br><span class="line">  dda22d: &apos;bosOjparj1&apos;,</span><br><span class="line">  obGeujRiary: &apos;akPatMyib5EbJetEteip9idWoncainil7&apos;,</span><br><span class="line">  Iadghod3: [Function: Iadghod3],</span><br><span class="line">  Vonsheac6: [Function: Vonsheac6],</span><br><span class="line">  RevUfPhas2: [Function: RevUfPhas2],</span><br><span class="line">  jiUteFraj8: [Function: jiUteFraj8],</span><br><span class="line">  DikVivec2: [Function: DikVivec2],</span><br><span class="line">  AdCejMod9: [Function: AdCejMod9],</span><br><span class="line">  atkopNersiv4: &apos;\u000bF©&gt;\u0013ä)bï#Í×¾?ÝR¯&quot;¸¨Ã\u0018=\u000fÞ\u0006Ô*|o-DX5¨&apos;,</span><br><span class="line">  fakCapFod9: &apos;Z\nùW\u0006\u001c·såå­\u0017IC2&apos;,</span><br><span class="line">  arnUftad4: 65,</span><br><span class="line">  ItOvyof7: &apos;)5512&#123;nn666o8.454#$o&quot;.,n6 5&quot;)~7|%\u00106u6x\u0016&amp;\u0019&quot;\u0010&apos;,</span><br><span class="line">  plain: &apos;https://www.youtube.com/watch?v=dQw4w9WgXcQ&apos;,</span><br><span class="line">  i: 43 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>hmmm…well if we look at the code the variables <code>atkopNersiv4</code> and <code>fakCapFod9</code> are not used in that final plain text RickRoll, neither is <code>dda22d</code>, so lets play with those for a bit….ok that’s enough of that…this didn’t go anywhere.</p>
+<p>At this point I started to look at the parsing errors that the various tools had and trying to figure out why they weren’t parsing well. Instead of digging too deep here, I decided to see what happens if I round trip the pdf. I open in the Acrobat Reader DC, and save it out as a new file…then I run those existing tools and notice an interesting object:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; /Type /Action</span><br><span class="line">/S /JavaScript</span><br><span class="line">/JS ■  i f ( e v e n t . v a l u e = = &quot; P A N &#123; g 0 o b y g o 0 b y d 0 0 w h 3 r 3 r u ? &#125; &quot; ) &#123; a p p . a l e r t ( &quot; y e s &quot; ) ; &#125; e l s e &#123; a p p . a l e r t ( &quot; n o &quot; ) ; &#125;</span><br><span class="line"> &gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>well look at that, a PAN{*} value:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PAN&#123;g0obygo0byd00wh3r3ru?&#125;</span><br></pre></td></tr></table></figure></p>
+<p>enter it in and</p>
+<p>BOOM</p>
+<p>we get document #4</p>
+
+	
+	</div>
+  <a type="button" href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/#more" class="btn btn-default more">Read More</a>
+</div>
+
+           
+		
+           
+			  
+	
+	<!-- display as entry -->	
+		<h3 class="title">
+			<div class="date"> 2016-08-15 </div>
 			<div class="article-title"><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/" >2016 Palo Alto Labyrenth CTF Doc 02</a></div>						
 		</h3>
 	
@@ -316,25 +358,31 @@
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/maldoc/">maldoc<span>5</span></a></li>
-		
-			<li><a href="/tags/CTF/">CTF<span>5</span></a></li>
-		
-			<li><a href="/tags/obligitory/">obligitory<span>1</span></a></li>
-		
-			<li><a href="/tags/ScreenSaver/">ScreenSaver<span>1</span></a></li>
-		
-			<li><a href="/tags/halfthoughts/">halfthoughts<span>1</span></a></li>
-		
 			<li><a href="/tags/archive/">archive<span>1</span></a></li>
-		
-			<li><a href="/tags/SVG/">SVG<span>1</span></a></li>
 		
 			<li><a href="/tags/Labyrenth/">Labyrenth<span>6</span></a></li>
 		
+			<li><a href="/tags/X509/">X509<span>1</span></a></li>
+		
+			<li><a href="/tags/gogs/">gogs<span>1</span></a></li>
+		
+			<li><a href="/tags/obligitory/">obligitory<span>1</span></a></li>
+		
 			<li><a href="/tags/security/">security<span>5</span></a></li>
 		
+			<li><a href="/tags/maldoc/">maldoc<span>5</span></a></li>
+		
+			<li><a href="/tags/SVG/">SVG<span>1</span></a></li>
+		
+			<li><a href="/tags/halfthoughts/">halfthoughts<span>1</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/ScreenSaver/">ScreenSaver<span>1</span></a></li>
+		
 			<li><a href="/tags/VB/">VB<span>1</span></a></li>
+		
+			<li><a href="/tags/CTF/">CTF<span>5</span></a></li>
 		
 		 
 		</ul>
@@ -346,6 +394,10 @@
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2018/05/18/HTTPS-GIT-and-Enterprise-certficates/" ><i class="fa fa-file-o"></i>HTTPS, GIT, and Enterprise ...</a>
+      </li>
     
       <li>
         <a href="/2018/01/22/New-HTML-Experiments/" ><i class="fa fa-file-o"></i>New HTML Experiments</a>
@@ -361,10 +413,6 @@
     
       <li>
         <a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/" ><i class="fa fa-file-o"></i>2016 Palo Alto Labyrenth CT...</a>
-      </li>
-    
-      <li>
-        <a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/" ><i class="fa fa-file-o"></i>2016 Palo Alto Labyrenth CT...</a>
       </li>
     
   </ul>
