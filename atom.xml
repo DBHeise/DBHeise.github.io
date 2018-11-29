@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dbheise.github.io/"/>
-  <updated>2018-05-18T17:55:24.613Z</updated>
+  <updated>2018-11-29T23:15:15.558Z</updated>
   <id>https://dbheise.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HTML Animations - javascript but how?</title>
+    <link href="https://dbheise.github.io/2018/11/29/HTML-Animations-javascript-but-how/"/>
+    <id>https://dbheise.github.io/2018/11/29/HTML-Animations-javascript-but-how/</id>
+    <published>2018-11-29T16:51:29.000Z</published>
+    <updated>2018-11-29T23:15:15.558Z</updated>
+    
+    <content type="html"><![CDATA[<p>So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div’s with javascript moving the div’s around the screen and it worked fine…but I really like SVG…so I rewrote the page to use SVG instead.</p><p><a href="/projects/animation_old.html">Orginial Page</a><br><a href="/projects/animation_new.html">New Page</a></p><p>Now its not taking advantage of any SVG Animations, or any specific animation framework…because as of this writing there isn’t a standardized support across all browsers and platforms: <a href="https://caniuse.com/#feat=svg-smil" target="_blank" rel="noopener">see here</a> </p><p>I will say based on my previous experience inside Microsoft I’m not terribly suprized that IE/Edge is the holdout for the SVG SMIL Animation standard. They simply have a different primary audience, and the general population is the secondary audience. Not to say that they don’t care (they do very much), but when push comes to shove the enterprise customers will override the general population for the IE/Edge designers…IMHO…but who’s to say things can’t change, they often do.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div’s with javascr
+      
+    
+    </summary>
+    
+    
+      <category term="HTML5" scheme="https://dbheise.github.io/tags/HTML5/"/>
+    
+      <category term="javascript" scheme="https://dbheise.github.io/tags/javascript/"/>
+    
+      <category term="SVG" scheme="https://dbheise.github.io/tags/SVG/"/>
+    
+      <category term="animation" scheme="https://dbheise.github.io/tags/animation/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTPS, GIT, and Enterprise certficates</title>

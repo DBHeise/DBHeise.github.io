@@ -3,13 +3,15 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>about | Crazy Dave&#39;s InterTube Emporium</title>
+  <title>HTML Animations - javascript but how? | Crazy Dave&#39;s InterTube Emporium</title>
   <meta name="author" content="Crazy Dave">
+  
+  <meta name="description" content="So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div’s with javascript moving th">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="about">
+  <meta property="og:title" content="HTML Animations - javascript but how?">
   <meta property="og:site_name" content="Crazy Dave&#39;s InterTube Emporium">
 
   
@@ -93,9 +95,11 @@
   <div class="container">
   	<div class="content">
     	 
+
+
 	
 		<div class="page-header page-header-inverse ">		
-			<h1 class="title title-inverse "> about</h1>
+			<h1 class="title title-inverse "> HTML Animations - javascript but how?</h1>
 		</div>		
 	
 
@@ -104,17 +108,22 @@
 
 
 
-<div class="row page">
+<div class="row post">
 	<!-- cols -->
 	
-	<div class="col-md-12">
+	<div id="top_meta"></div>
+	<div class="col-md-9">
 	
 
 	<!-- content -->
 	<div class="mypage">		
 	  		
 
-	  	  
+	  <p>So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div’s with javascript moving the div’s around the screen and it worked fine…but I really like SVG…so I rewrote the page to use SVG instead.</p>
+<p><a href="/projects/animation_old.html">Orginial Page</a><br><a href="/projects/animation_new.html">New Page</a></p>
+<p>Now its not taking advantage of any SVG Animations, or any specific animation framework…because as of this writing there isn’t a standardized support across all browsers and platforms: <a href="https://caniuse.com/#feat=svg-smil" target="_blank" rel="noopener">see here</a> </p>
+<p>I will say based on my previous experience inside Microsoft I’m not terribly suprized that IE/Edge is the holdout for the SVG SMIL Animation standard. They simply have a different primary audience, and the general population is the secondary audience. Not to say that they don’t care (they do very much), but when push comes to shove the enterprise customers will override the general population for the IE/Edge designers…IMHO…but who’s to say things can’t change, they often do.</p>
+	  
 	</div>
 
 	<div>
@@ -122,6 +131,16 @@
 	<div class="pagination">
 <ul class="pagination">
 	 
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>Prev</a></li>
+        
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2018/05/18/HTTPS-GIT-and-Enterprise-certficates/" class="alignright next">Next<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
 </ul>
 </div>
 
@@ -130,11 +149,58 @@
 
     <!-- share -->
     
+        
+
+        
+
+    
 	
 	<!-- comment -->
 	
+<section id="comment">
+  <h2 class="title">Comments</h2>
+
+  
+</section>
+
 	</div> <!-- col-md-9/col-md-12 -->
 		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-11-29 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/HTML5/">HTML5<span>1</span></a></li> <li><a href="/tags/javascript/">javascript<span>1</span></a></li> <li><a href="/tags/SVG/">SVG<span>2</span></a></li> <li><a href="/tags/animation/">animation<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
 		
 
 </div><!-- row -->
