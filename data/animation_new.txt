@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link type="text/plain" rel="author" href="humans.txt" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test.heiseink.com</title>   
+</head>
+
+<body>
+    <div id="Layer" style="border: solid red 2px; margin: 0 auto;">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1" viewBox="-50 -50 100 100" width="100%" height="100%">
+    </svg>
+</div>
+    <script type="text/javascript">
+        function viewport() {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            return { width: e[a + 'Width'], height: e[a + 'Height'] }
+        }
+
+
+        function onResize() {
+            var view = viewport()
+            var size = Math.min(view.width, view.height) - 20
+            var container = document.getElementById("Layer") 
+            container.style.width = size + "px"
+            container.style.height = size + "px"
+        }
+
+        window.onresize = onResize
+        onResize()
+
+        var list = new Array()
+        var id = setInterval(frame, 20)
+        var svgParent = document.getElementById("Layer").children[0]
+        var startAngle = 0
+        var radius = 40
+        var angleDelta = (2 * Math.PI) / list.length
+        
+        function addCircle(text, color) {
+            var newObj = {"Text": text, "BackgroundColor": color}
+            var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+            circle.setAttribute("cx", 10)
+            circle.setAttribute("cy", 10)
+            circle.setAttribute("r", 5)
+            circle.setAttribute("fill", color)
+            //var txt = document.createElementNS("http://www.w3.org/2000/svg", "text")
+            //circle.appendChild(txt)
+            svgParent.appendChild(circle)
+            newObj.DomObj = circle
+            list.push(newObj)
+            angleDelta = (2 * Math.PI) / list.length
+        }
+        
+        
+        function frame() {
+            var angle = startAngle
+            for (let index = 0; index < list.length; index++) {
+                const e = list[index].DomObj;                
+                e.setAttribute("cx", radius * Math.cos(angle))
+                e.setAttribute("cy", radius * Math.sin(angle))
+                angle = angle + angleDelta
+            }
+            startAngle += 0.005
+            if (startAngle >= Math.PI * 2) { startAngle = 0}
+
+        }
+
+        var colors = ["#4AD474", "#47A6C1", "#FFAD59", "#FF7059"]
+        var n = Math.floor((Math.random() * 10) + 1)
+        for (let i = 0; i < n; i++) {
+            var c = colors[i % colors.length]
+            addCircle("", c)
+        }
+
+    </script>
+</body>
+
+</html>
