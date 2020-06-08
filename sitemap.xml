@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://dbheise.github.io/posts/2020-06-08-the-solution-to-all-our-woes/</loc>
-    <lastmod>2020-06-08T16:51:45-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://dbheise.github.io/</loc>
     <lastmod>2020-06-08T16:51:45-04:00</lastmod>
   </url>
@@ -29,6 +24,11 @@
   
   <url>
     <loc>https://dbheise.github.io/tags/the-gospel/</loc>
+    <lastmod>2020-06-08T16:51:45-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dbheise.github.io/posts/2020-06-08-the-solution-to-all-our-woes/</loc>
     <lastmod>2020-06-08T16:51:45-04:00</lastmod>
   </url>
   
