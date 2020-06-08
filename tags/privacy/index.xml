@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>privacy on </title>
-    <link>https://blog.heiseink.com/tags/privacy/</link>
+    <link>https://dbheise.github.io/tags/privacy/</link>
     <description>Recent content in privacy on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 09 Dec 2009 03:28:00 -0500</lastBuildDate>
     
-	<atom:link href="https://blog.heiseink.com/tags/privacy/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dbheise.github.io/tags/privacy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Its not VERSUS its PLUS</title>
-      <link>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</link>
+      <link>https://dbheise.github.io/posts/2009-12-09-its-not-versus-its-plus/</link>
       <pubDate>Wed, 09 Dec 2009 03:28:00 -0500</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</guid>
+      <guid>https://dbheise.github.io/posts/2009-12-09-its-not-versus-its-plus/</guid>
       <description>From Schiener on Security - My Reaction to Eric Schmidt:
 Too many wrongly characterize the debate as &amp;ldquo;security versus privacy.&amp;rdquo; The real choice is liberty versus control. Tyranny, whether it arises under threat of foreign physical attack or under constant domestic authoritative scrutiny, is still tyranny. Liberty requires security without intrusion, security plus privacy. Widespread police surveillance is the very definition of a police state. And that&amp;rsquo;s why we should champion privacy even when we have nothing to hide.</description>
     </item>
     
     <item>
       <title>Keeping Big Brother Out</title>
-      <link>https://blog.heiseink.com/posts/2009-08-03-keeping-big-brother-out/</link>
+      <link>https://dbheise.github.io/posts/2009-08-03-keeping-big-brother-out/</link>
       <pubDate>Mon, 03 Aug 2009 11:54:00 -0400</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2009-08-03-keeping-big-brother-out/</guid>
+      <guid>https://dbheise.github.io/posts/2009-08-03-keeping-big-brother-out/</guid>
       <description>Keeping Big Brother Out: A VERY Brief Guide to Privacy Online The Principles  Once something is online, it is eternal! This goes for all email, tweets, blog posts, forum posts, comments, etc Encrypt everything you want private, if its not encrypted assume others read it and know it came from you! Again this goes for all email, tweets, blog posts and comments, forum posts and comments, anything everywhere. Encoding is not Encryption!</description>
     </item>
     

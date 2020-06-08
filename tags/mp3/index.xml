@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mp3 on </title>
-    <link>https://blog.heiseink.com/tags/mp3/</link>
+    <link>https://dbheise.github.io/tags/mp3/</link>
     <description>Recent content in mp3 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Dec 2009 13:44:00 -0500</lastBuildDate>
     
-	<atom:link href="https://blog.heiseink.com/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dbheise.github.io/tags/mp3/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Powershell script to Convert MOV audio files to MP3 using VLC</title>
-      <link>https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</link>
+      <link>https://dbheise.github.io/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</link>
       <pubDate>Tue, 01 Dec 2009 13:44:00 -0500</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</guid>
+      <guid>https://dbheise.github.io/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</guid>
       <description>So I&amp;rsquo;ve had a need lately to convert MOV audio files to MP3. At first I searched for self contained solutions online and everything looked and worked like carp-on-a-stick. So here&amp;rsquo;s what I came up with&amp;hellip;use VLC, then I put it in a powershell script.
 Here&amp;rsquo;s the commandline for VLC to do the work:
 vlc -I dummy &amp;lt;INPUTFILE&amp;gt; &amp;quot;:sout=#transcode{acodec=mp3,ab=128,channels=6}:standard{access=file,mux=asf,dst=&amp;lt;OUTPUTFILE&amp;gt;}&amp;quot; vlc://quitThen I just wrapped this around a &amp;ldquo;gci&amp;rdquo; on an input folder and viola!</description>

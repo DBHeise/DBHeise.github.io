@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>X509 on </title>
-    <link>https://blog.heiseink.com/tags/x509/</link>
+    <link>https://dbheise.github.io/tags/x509/</link>
     <description>Recent content in X509 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 18 May 2018 12:25:23 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.heiseink.com/tags/x509/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dbheise.github.io/tags/x509/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTTPS, GIT, and Enterprise certficates</title>
-      <link>https://blog.heiseink.com/posts/2018-05-18-https-git-and-enterprise-certficates/</link>
+      <link>https://dbheise.github.io/posts/2018-05-18-https-git-and-enterprise-certficates/</link>
       <pubDate>Fri, 18 May 2018 12:25:23 +0000</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2018-05-18-https-git-and-enterprise-certficates/</guid>
+      <guid>https://dbheise.github.io/posts/2018-05-18-https-git-and-enterprise-certficates/</guid>
       <description>So I was setting up my GOGS internally so my sons could have a place to push code (and so I could host my many never-completed projects) and I ran across an issue with git not liking my certificate on the HTTPS server. Its not self-signed, but it is from my internal CA. This is windows-land so its already trusted (AD CS) by the OS, but apparently not by the default git install.</description>
     </item>
     

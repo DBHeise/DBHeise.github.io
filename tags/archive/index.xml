@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>archive on </title>
-    <link>https://blog.heiseink.com/tags/archive/</link>
+    <link>https://dbheise.github.io/tags/archive/</link>
     <description>Recent content in archive on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 21 Aug 2016 20:40:17 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.heiseink.com/tags/archive/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dbheise.github.io/tags/archive/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My First ScreenSaver - an obsession in VB6</title>
-      <link>https://blog.heiseink.com/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</link>
+      <link>https://dbheise.github.io/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</link>
       <pubDate>Sun, 21 Aug 2016 20:40:17 +0000</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</guid>
+      <guid>https://dbheise.github.io/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</guid>
       <description>So back when I first started writing code, I was had this obsession with screen savers. I don&amp;rsquo;t really know why but I loved screen savers that were not repetitive, ones that changed over time and did something. Like any of the following:
  Johnny Castaway by Sierra Online - best writeup, wikipedia the After Dark series by Berkeley Systems - wikipedia SETI@home World Community Grid Various Santa Clause antic&amp;rsquo;s screen savers Various Fish Tank screen savers  &amp;hellip;and my personal favorite:</description>
     </item>

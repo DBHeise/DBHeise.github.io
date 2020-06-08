@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SVG on </title>
-    <link>https://blog.heiseink.com/tags/svg/</link>
+    <link>https://dbheise.github.io/tags/svg/</link>
     <description>Recent content in SVG on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 29 Nov 2018 16:51:29 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.heiseink.com/tags/svg/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dbheise.github.io/tags/svg/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>HTML Animations - javascript but how?</title>
-      <link>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</link>
+      <link>https://dbheise.github.io/posts/2018-11-29-html-animations-javascript-but-how/</link>
       <pubDate>Thu, 29 Nov 2018 16:51:29 +0000</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</guid>
+      <guid>https://dbheise.github.io/posts/2018-11-29-html-animations-javascript-but-how/</guid>
       <description>So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div&amp;rsquo;s with javascript moving the div&amp;rsquo;s around the screen and it worked fine&amp;hellip;but I really like SVG&amp;hellip;so I rewrote the page to use SVG instead.
  Old Page New Page  Now its not taking advantage of any SVG Animations, or any specific animation framework&amp;hellip;because as of this writing there isn&amp;rsquo;t a standardized support across all browsers and platforms: see here</description>
     </item>
     
     <item>
       <title>New HTML Experiments</title>
-      <link>https://blog.heiseink.com/posts/2018-01-22-new-html-experiments/</link>
+      <link>https://dbheise.github.io/posts/2018-01-22-new-html-experiments/</link>
       <pubDate>Mon, 22 Jan 2018 15:23:36 +0000</pubDate>
       
-      <guid>https://blog.heiseink.com/posts/2018-01-22-new-html-experiments/</guid>
+      <guid>https://dbheise.github.io/posts/2018-01-22-new-html-experiments/</guid>
       <description>So I&amp;rsquo;ve recently had a few automation random ideas. The problem was that it was such a small automation and I wanted it to be useable anywhere, so I wrote it in a single HTML page and the code is in Javascript.
  SVG Path Cleaner - changes all the numbers in a SVG path to be decimal (i.e. rounds the number) Random SVG Page - creates a small random SVG path  </description>
     </item>
