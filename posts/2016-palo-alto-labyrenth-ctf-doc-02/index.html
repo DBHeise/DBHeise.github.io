@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">2016 Palo Alto Labyrenth CTF Doc 02</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/security/">security</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/CTF/">CTF</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/maldoc/">maldoc</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/Labyrenth/">Labyrenth</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2016 Aug 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a></li>
+</ul>
+<p>So we solved the frist document and then they give us this&hellip;Document #2 (hash: <a href="/data/PAN_CTF_DOCTrack_002.zip">ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E</a>)</p>
+<p>So again, run it through <a href="https://github.com/DBHeise/fileid">FileId</a> tool and get the VBA code out (using the XML or JSON output options).</p>
+<pre><code>
+Sub AutoOpen()
+'
+' crackme Macro
+'
+'
+    UserForm1.Show
+End Sub
+</code></pre><p>and</p>
+<pre><code>Private Sub button_Click()
+    x = suchcrypto(key.Text, &quot;General Vidal&quot;)
+    If x = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot; Then
+        MsgBox &quot;Wow. Good Job! Such crack.&quot;
+    Else
+        MsgBox &quot;U can do. Try harder...&quot;
+    End If
+End Sub
+
+Function suchcrypto(sMessage, strKey)
+    Dim kLen, x, y, i, j, temp
+    Dim s(256), k(256)
+    kLen = Len(strKey)
+    For i = 0 To 255
+        s(i) = i
+        k(i) = Asc(Mid(strKey, (i Mod kLen) + 1, 1))
+    Next
+    j = 0
+    For i = 0 To 255
+        j = (j + k(i) + s(i)) Mod 256
+        temp = s(i)
+        s(i) = s(j)
+        s(j) = temp
+    Next
+    x = 0
+    y = 0
+    For i = 1 To 3072
+        x = (x + 1) Mod 256
+        y = (y + s(x)) Mod 256
+        temp = s(x)
+        s(x) = s(y)
+        s(y) = temp
+    Next
+    For i = 1 To Len(sMessage)
+        x = (x + 1) Mod 256
+        y = (y + s(x)) Mod 256
+        temp = s(x)
+        s(x) = s(y)
+        s(y) = temp
+ 
+        suchcrypto = suchcrypto &amp; (s((s(x) + s(y)) Mod 256) Xor Asc(Mid(sMessage, i, 1))) &amp; &quot;,&quot;
+    Next
+End Function
+</code></pre><p>ok, so we show a form, get user input and then run the &ldquo;<code>button_Click</code>&rdquo; subroutine&hellip;but look, we know what the answer should be when we read the IF statement. So basic algebra here&hellip;we know one of the two inputs, we have the function, and we know the output&hellip;.we can brute force&hellip;</p>
+<p>ugh, brute forcing&hellip;and in VBA&hellip;ok if I have to&hellip;<em>sigh</em>. In retrospect, I can think of several other ways to attack this &ldquo;crypto&rdquo; other than brute forcing, but that&rsquo;s what I did in the moment.</p>
+<pre><code>Sub BruteEnForcer()
+    ans = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot;
+    k = &quot;General Vidal&quot;
+
+    msg = &quot;&quot;
+    Do
+    
+    Loop Until suchcrypto(msg, k) = ans
+
+End Sub
+</code></pre><p>ok, so now we have a simple logic/programming problem. We know what the result will be, but how can we figure out what the msg variable should be. How do we know when we are even close&hellip;are we going to iterate over all possible typable strings until we find a match? No, well we could, but no just no. You&rsquo;ll notice there are a bunch of comma&rsquo;s in the &lsquo;answer&rsquo; string and based on the &lsquo;decyption&rsquo; code it appends a comma after iterating over each letter in the message. So lets make that answer an array and go character by character until we get matches. I&rsquo;m also going to limit it to alphanumeric characters, unless that doesn&rsquo;t work. I would post by brute forcing code that I used, but I didn&rsquo;t save it&hellip;so here&rsquo;s some code that <em>might</em> work:</p>
+<pre><code>Sub BruteEnForcer()
+    ans = &quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&quot;
+    k = &quot;General Vidal&quot;
+    
+    ansArry = Split(ans, &quot;,&quot;)
+    
+    msg = &quot;&quot;
+    leng = 1
+    Do
+        For i = 32 To 126
+            tmpMsg = msg + Chr(i)
+            tmp = Split(suchcrypto(tmpMsg, k), &quot;,&quot;)
+            If tmp(leng) = ansArry(leng) Then
+                msg = tmpMsg
+                leng = leng + 1
+                Exit For
+            End If
+        Next i
+    Loop Until suchcrypto(msg, k) = ans
+    MsgBox msg
+End Sub
+</code></pre><p>which when run gives us the following output:</p>
+<pre><code>PAN{L4$t_Night_@f@iry_Vizited_M3}
+</code></pre><p>gee that looks like it might be it&hellip;</p>
+<p>BOOM</p>
+<p>and we move on to doc #3</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

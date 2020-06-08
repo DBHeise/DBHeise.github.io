@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">2016 Palo Alto Labyrenth CTF Doc 04</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/security/">security</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/CTF/">CTF</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/maldoc/">maldoc</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/Labyrenth/">Labyrenth</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2016 Aug 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a></li>
+</ul>
+<p>Ok, so the fourth challenge is again a zip file (hash: 1A2570D5CC6E2C3A185E939DC49CB4B908B867E02AC84BF7ABB532B3395FB01A) and it contains a file fun.docm (hash: <a href="/data/PAN_CTF_DOCTrack_004.zip">4AE794A701D2F28BA7E6292F0463444F6A567CB7C26188A518270544252877FB</a>). Now the first thing you need to know about the newer office file formats is that they are all zip files. So yes a DOCM and a XLSX and a PPTX, etc are all ZIP files with various contents pieces inside (see <a href="https://github.com/DBHeise/fileid/wiki/zip">here</a> for other zip based documents)</p>
+<p>SIDENOTE: this is one of the very reasons that I wrote my <a href="https://github.com/DBHeise/fileid">FileId</a> tool to begin with. Most file identification apps don&rsquo;t go very much beyond magic headers. If we understand that the magic header gives us a container format (i.e. Ole Structured Storage [OLESS], ZIP, and many others), then we can parse that container and gain much more information. This is exactly what FileId does it understands OLESS files and ZIP files and has some ideas what to look for inside to figure out its true file type.</p>
+<p>SIDE-SIDENOTE: Of course since its a container then we can do nasty things that were never intended to be done&hellip;like having a DOC, XLS, PPT all in a single file and all open completely different content depending on which app is opening it.</p>
+<p>ok, back to the challenge at hand and DOCM file! we can verify its a DOCM by running it through <a href="https://github.com/DBHeise/fileid">FileId</a> or we can simply run 7zip and extract the contents&hellip;which is what I did. Since its truly a DOCM we will find a file inside the <code>WORD</code> subfolder named <code>vbaProject.bin</code> (it actually doesn&rsquo;t have to be named this, but I digress). I also happen to know that this is also an OLESS file, so again we can run it through <a href="https://github.com/DBHeise/fileid">FileId</a>, but there is a known bug in <a href="https://github.com/DBHeise/fileid">FileId</a> here&hellip;</p>
+<p>So here we have a couple of choices as what to do next, but the underlying principle is to get to the VBA&hellip;here are several options (I did them all):</p>
+<ol>
+<li>use olevba.py in <a href="http://www.decalage.info/python/oletools">OleTools</a> by Philippe Lagadec</li>
+<li>use the office object model to open and save the file in the DOC format (won&rsquo;t run macro, but will maintain them)</li>
+<li>unzip the DOCM, edit the <code>vbaProject.bin</code> to remove the  protections and alter the autorun functionname (how to do this will be covered in the <a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a> writeup)</li>
+</ol>
+<p>So lets assume you did one of those, you&rsquo;d get the following macro parts:</p>
+<p>=ThisDocument=</p>
+<pre><code>#If VBA7 And Win64 Then
+Private Declare PtrSafe Function jFlnz8 Lib &quot;winmm.dll&quot; Alias &quot;sndPlaySoundA&quot; _
+       (ByVal lpszSoundName As String, ByVal uFlags As Long) As Long
+#Else
+Private Declare Function jFlnz8 Lib &quot;winmm.dll&quot; Alias &quot;sndPlaySoundA&quot; _
+       (ByVal lpszSoundName As String, ByVal uFlags As Long) As Long
+#End If
+
+Public cMSuxt As Variant
+Public gkKg As Object
+Public cN3r As String
+Public kZ4gU8sc As String
+Public qa317 As Integer
+
+Sub znOIKcDsLlMKQVsnFfWaE2bHu18RdOmKFoVb()
+    Selection.WholeStory
+    Selection.Font.ColorIndex = (Selection.Font.ColorIndex + 1) Mod 15
+    If Selection.Font.ColorIndex Mod 2 = 0 Then
+        Set gkKg = CreateObject(&quot;Excel.Application&quot;)
+        gkKg.Speech.speak NpuXrzgq.Label1, True
+        gkKg.Quit
+    ElseIf Selection.Font.ColorIndex Mod 2 = 1 Then
+        adk49an = Environ(&quot;tmp&quot;) &amp; &quot;\&quot; &amp; &quot;asdf&quot;
+        jFlnz8 adk49an, 1
+    End If
+    Application.OnTime Now + TimeValue(&quot;00:00:01&quot;), &quot;znOIKcDsLlMKQVsnFfWaE2bHu18RdOmKFoVb&quot;
+End Sub
+
+Private Sub UxKo3LivfGHxI2OtWa3KtqOgY6cRb5yrbR00(m4dYL, fviLw9)
+    On Error GoTo NavnYIF0:
+    Dim fjGeMmP8Z() As Byte
+    fjGeMmP8Z = Z1yiWeP.t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(m4dYL)
+    Z1yiWeP.pZVZ0Q8ygfA6jcSJRLEKZSyv40IDQzErCpah fjGeMmP8Z, fviLw9
+NavnYIF0:
+    GoTo VadXU4
+VadXU4:
+
+End Sub
+
+Private Function BqNFmKCS7cTPv9XNFOd2mCLrdqCfmdNm6HBz(dd) As Boolean
+    BqNFmKCS7cTPv9XNFOd2mCLrdqCfmdNm6HBz = False
+    On Error GoTo B3A:
+    Dim A4xcPiKtrr() As Byte
+    A4xcPiKtrr = Z1yiWeP.t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(dd)
+    BqNFmKCS7cTPv9XNFOd2mCLrdqCfmdNm6HBz = Z1yiWeP.Cj2XBWUOfIP7E9oOZKQEB0zFWe2Cf4NbfApB(A4xcPiKtrr)
+B3A:
+End Function
+
+Private Function zoycqKJvqznJMeMpHe7Z61xYJfLLmbObxBVy()
+    zoycqKJvqznJMeMpHe7Z61xYJfLLmbObxBVy = None
+    For Each ok0I11 In ActiveDocument.VBProject.VBComponents
+        l = 1
+        Set gjvhSFe = ok0I11.CodeModule
+        Do While l &lt; gjvhSFe.CountOfLines
+            za29rx = gjvhSFe.ProcOfLine(l, 0)
+            If za29rx &lt;&gt; &quot;&quot; Then
+                If BqNFmKCS7cTPv9XNFOd2mCLrdqCfmdNm6HBz(za29rx) Then
+                    zoycqKJvqznJMeMpHe7Z61xYJfLLmbObxBVy = za29rx
+                    GoTo CfHFE
+                End If
+                l = l + gjvhSFe.ProcCountLines(za29rx, 0)
+            Else
+                l = l + 1
+            End If
+        Loop
+    Next ok0I11
+CfHFE:
+End Function
+
+Private Sub XiqyXdC809pP5esSrC633ag92w0x6otQylY0()
+    sN2l0P = zoycqKJvqznJMeMpHe7Z61xYJfLLmbObxBVy
+    If Not IsNull(sN2l0P) Then
+        For Each LHKwfvbUC In ActiveDocument.VBProject.VBComponents
+            If LHKwfvbUC.Type = 1 Then
+                HKwfvbU = 1
+                Set cm = LHKwfvbUC.CodeModule
+                Do While HKwfvbU &lt; cm.CountOfLines
+                    pn = cm.ProcOfLine(HKwfvbU, 0)
+                    If pn &lt;&gt; &quot;&quot; Then
+                        UxKo3LivfGHxI2OtWa3KtqOgY6cRb5yrbR00 pn, sN2l0P
+                        HKwfvbU = HKwfvbU + cm.ProcCountLines(pn, 0)
+                    Else
+                        HKwfvbU = HKwfvbU + 1
+                    End If
+                Loop
+            End If
+        Next LHKwfvbUC
+    End If
+    zkceuV405Q5LjUp587OYxTI7OR9zTyPdvz8k
+End Sub
+
+Private Function OcbCTRJiqmq8ZHdtwfA1hsuje7UPUwkL1TcL(e2qBnJA1D, GNheMViA)
+    df = Environ(&quot;tmp&quot;) &amp; &quot;\&quot; &amp; e2qBnJA1D
+    Dim CiuxGXWXyEUw4() As Byte
+    CiuxGXWXyEUw4 = Z1yiWeP.t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(GNheMViA)
+    Open df For Binary Access Write As #1
+    Put #1, , CiuxGXWXyEUw4
+    Close #1
+    OcbCTRJiqmq8ZHdtwfA1hsuje7UPUwkL1TcL = df
+End Function
+
+Private Sub zkceuV405Q5LjUp587OYxTI7OR9zTyPdvz8k()
+    yRQaQqmn4iZIgFxTHSbChaoJt9SxKmV7T1L5
+    Selection.WholeStory
+    Selection.Delete
+    Selection.TypeText NpuXrzgq.Label1
+    Selection.WholeStory
+    Selection.Font.Size = 72
+    znOIKcDsLlMKQVsnFfWaE2bHu18RdOmKFoVb
+End Sub
+
+Private Sub yRQaQqmn4iZIgFxTHSbChaoJt9SxKmV7T1L5()
+    cMSuxt = Array(OcbCTRJiqmq8ZHdtwfA1hsuje7UPUwkL1TcL(&quot;asdf&quot;, NpuXrzgq.assda))
+    kZ4gU8sc = NpuXrzgq.Label1
+End Sub
+
+Public Sub Document_Open()
+    On Error GoTo sjjQMD:
+    If ActiveDocument.VBProject.VBComponents.Count &gt; 4 Then
+        XiqyXdC809pP5esSrC633ag92w0x6otQylY0
+    Else
+        zkceuV405Q5LjUp587OYxTI7OR9zTyPdvz8k
+    End If
+sjjQMD:
+    If err.Number = 6068 Or err.Number = 50289 Then
+        zkceuV405Q5LjUp587OYxTI7OR9zTyPdvz8k
+    Else
+        Resume Next
+    End If
+End Sub
+
+
+</code></pre><p>=Z1yiWeP=</p>
+<pre><code>Attribute VB_Name = &quot;Z1yiWeP&quot;
+Function d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql(JwFeyAb5x, AgkWcn As Byte) As Variant
+    Dim bzTec() As Byte
+    ReDim bzTec(UBound(JwFeyAb5x))
+    For cz9vzhBR = 0 To UBound(JwFeyAb5x)
+        bzTec(cz9vzhBR) = JwFeyAb5x(cz9vzhBR) Xor AgkWcn
+    Next
+    d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql = bzTec
+End Function
+
+Private Sub ir0a6FeeF0LUThieRM7v6qxfWFJD1dT6BzDH()
+    Dim opy7ej As VBIDE.VBProject
+    Dim PiO3rcWe As VBIDE.VBComponent
+    Set opy7ej = ActiveDocument.VBProject
+    Set PiO3rcWe = opy7ej.VBComponents(&quot;IadnoxRap3&quot;)
+    opy7ej.VBComponents.Remove PiO3rcWe
+End Sub
+
+Function YhGEH9M4EBM4CJgXjOsrcHsa(u48G As Byte, G6NK) As Variant
+    YhGEH9M4EBM4CJgXjOsrcHsa = d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql(G6NK, u48G)
+End Function
+
+Function lT6fYsPEvHPdOsRZuM6Mn5DTumMvEfSGHnSo(sHZF70G) As String
+    TPjEpV = &quot;&quot;
+    For cz9vzhBR = 1 To UBound(sHZF70G)
+        TPjEpV = TPjEpV &amp; StrConv(sHZF70G(cz9vzhBR), 64)
+    Next
+    lT6fYsPEvHPdOsRZuM6Mn5DTumMvEfSGHnSo = StrConv(sHZF70G, 64)
+End Function
+
+Function oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR(Rfn10hWpA, XPbV8Rj5Q) As Boolean
+    If UBound(Rfn10hWpA) = UBound(XPbV8Rj5Q) Then
+        oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR = True
+        For z5PQAfu9 = 0 To UBound(Rfn10hWpA)
+            If (Rfn10hWpA(z5PQAfu9) &lt;&gt; XPbV8Rj5Q(z5PQAfu9)) Then
+                oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR = False
+                z5PQAfu9 = UBound(Rfn10hWpA)
+            End If
+        Next z5PQAfu9
+    Else
+        oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR = False
+    End If
+End Function
+
+Private Sub DGOoR0P7MooO533jiHhTv1sgIoOtbjkzd57H()
+    Dim yQnfle As VBIDE.VBProject
+    Dim TQhuHj As VBIDE.VBComponent
+    Set yQnfle = ActiveDocument.VBProject
+    Set TQhuHj = yQnfle.VBComponents.Add(1)
+    TQhuHj.CodeModule.InsertLines 1, lT6fYsPEvHPdOsRZuM6Mn5DTumMvEfSGHnSo( _
+    d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql(t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(U8pblvDZuAh8GY.TextBox1 _
+    ), U8pblvDZuAh8GY.TextBox1.Left))
+    TQhuHj.Name = &quot;IadnoxRap3&quot;
+End Sub
+
+Function bSaj5R3JtfzBByy8fhXtaHSvTG2C9luMFjIk(ToEZKjU, qSFa4f) As Variant
+    Dim Qteou7() As Byte
+    ReDim Qteou7(UBound(ToEZKjU))
+    For Uvhtuj = 0 To UBound(ToEZKjU)
+        Qteou7(Uvhtuj) = ToEZKjU(Uvhtuj) Xor qSFa4f(Uvhtuj)
+    Next
+    bSaj5R3JtfzBByy8fhXtaHSvTG2C9luMFjIk = Qteou7
+End Function
+
+Function Cj2XBWUOfIP7E9oOZKQEB0zFWe2Cf4NbfApB(nuQXoad42c5)
+    Cj2XBWUOfIP7E9oOZKQEB0zFWe2Cf4NbfApB = False
+    Dim yTV2li() As Byte
+    yTV2li = Z1yiWeP.d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql(nuQXoad42c5, U8pblvDZuAh8GY.HelpContextId)
+    Dim VGmMTyf() As Byte
+    VGmMTyf = Z1yiWeP.YhGEH9M4EBM4CJgXjOsrcHsa(Int(U8pblvDZuAh8GY.ScrollHeight), yTV2li)
+    If oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR(VGmMTyf, t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(U8pblvDZuAh8GY.Label1.Caption)) Then
+        Cj2XBWUOfIP7E9oOZKQEB0zFWe2Cf4NbfApB = True
+    End If
+End Function
+
+Function t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(qqZUlc9)
+    aexjT = Trim(qqZUlc9)
+    Set vW3zM = CreateObject(StrReverse(&quot;tnemucoDMOD.2LMXSM&quot;))
+    Set ugBi6C = vW3zM.createElement(&quot;b64&quot;)
+    ugBi6C.dataType = &quot;bin.base&quot; + CStr(vbUnicode)
+    ugBi6C.Text = aexjT
+    t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG = ugBi6C.nodeTypedValue
+    Set ugBi6C = Nothing
+    Set vW3zM = Nothing
+End Function
+
+Sub XWn5TNdoykQb0QoitVEG7sLOxIRSi97XmqmM(EZ9KcDzT, pNRoZP57xLx)
+    Dim ang8rjzwn() As Byte
+    ang8rjzwn = Z1yiWeP.d7KRoSK5UEDh35jJNkj0TtcJjOIbmBZlyCql(EZ9KcDzT, U8pblvDZuAh8GY.ScrollWidth)
+    Dim upnFZMT9P() As Byte
+    upnFZMT9P = Z1yiWeP.YhGEH9M4EBM4CJgXjOsrcHsa(U8pblvDZuAh8GY.Zoom, ang8rjzwn)
+    Dim s06() As Byte
+    s06 = Z1yiWeP.bSaj5R3JtfzBByy8fhXtaHSvTG2C9luMFjIk(upnFZMT9P, t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(pNRoZP57xLx))
+    If Z1yiWeP.oDF26uAC8jD8UVkZDlzov3c05bVN8upeerTR(s06, Z1yiWeP.t5ksdVMEuR2gVAPtbKyAxgbL2dy0UBt64qQG(StrReverse(U8pblvDZuAh8GY.Tag))) Then
+        MsgBox Z1yiWeP.lT6fYsPEvHPdOsRZuM6Mn5DTumMvEfSGHnSo(EZ9KcDzT)
+    End If
+End Sub
+
+Sub pZVZ0Q8ygfA6jcSJRLEKZSyv40IDQzErCpah(tnfbhVCs, AjkbXE)
+    XWn5TNdoykQb0QoitVEG7sLOxIRSi97XmqmM tnfbhVCs, AjkbXE
+End Sub
+</code></pre><p>so there&rsquo;s a bunch of stuff&hellip;now what. Well I spent waaayyy to much time deobfuscating &amp; renaming every function to something more meaningful and useful. So I have a DOCM that is cleanedup and safe to open (i.e. no Document_Open subroutine, no passwords or anything). Get it here: <a href="/data/FILE.cleaned.docm">19E8BE71029D5900C54EB2213E097BC442003C1F4F5E7940B71F9902A00270FB</a>.</p>
+<p>like I said I spent too much time going over each function, figuring out what it does and renaming it (yes I wrote some tools for this, but they&rsquo;re not ready to share).</p>
+<p>If you look at the code in the clean-up document take a look at the last few functions in the `mod1&rsquo; module:</p>
+<pre><code>Sub fnCheck(fnB64Arry, customKey)
+    Dim tmp1() As Byte
+    tmp1 = mod1.fnSimpleXor(fnB64Arry, frm2.ScrollWidth)
+    Dim tmp2() As Byte
+    tmp2 = mod1.fnSimpleXor_wrapper(frm2.Zoom, tmp1)
+    Dim tmp3() As Byte
+    tmp3 = mod1.fnCustomXor(tmp2, fnToBase64Ary(customKey))
+    
+    Dim a1 As String: a1 = mod1.toString(fnB64Arry)
+    Dim a2 As String: a2 = mod1.toString(tmp3)
+    Dim a3 As String: a3 = mod1.toString(mod1.fnToBase64Ary(StrReverse(frm2.Tag)))
+    
+    If mod1.fnIsB64Identicals(tmp3, mod1.fnToBase64Ary(StrReverse(frm2.Tag))) Then
+        MsgBox a2
+    End If
+End Sub
+
+Sub test()
+    b64 = Split(&quot;A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9,+,/&quot;, &quot;,&quot;)
+    customKey = &quot;yRQaQqmn4iZIgFxTHSbChaoJt9SxKmV7T1L5&quot;
+    Dim tmp() As Byte
+    Dim strBase As String: strBase = &quot;XJCR/DogZt7bduvvusJgAQu6QX9DmtKN+bZB&quot;
+    fnB64Arry = mod1.fnToBase64Ary(strBase)
+    
+    Dim tmp1() As Byte
+    tmp1 = mod1.fnSimpleXor(fnB64Arry, frm2.ScrollWidth)
+    Dim tmp2() As Byte
+    tmp2 = mod1.fnSimpleXor_wrapper(frm2.Zoom, tmp1)
+    Dim tmp3() As Byte
+    tmp3 = mod1.fnCustomXor(tmp2, fnToBase64Ary(customKey))
+        
+    MsgBox mod1.toString(tmp3)
+End Sub
+</code></pre><p>The <code>test</code> subroutine is something that I put in to get the key out, but I figured all the parts and peices by going through each function and figuring out what they do, where it was pulling values from and what the values were in some cases. The only suggestion I have is get good at debugging!</p>
+<p>After that I noticed an oddity in this <code>fnCheck</code> function (orginally it was named <code>XWn5TNdoykQb0QoitVEG7sLOxIRSi97XmqmM</code>) - it would do a check and then show a message box. Hmm, I wonder what the value would have to be in order to have the message box show? Well since I had just done a brute force exercise a few minutes eairler (see <a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a>) I started using the brute force routine to get out the expected value&hellip;.but after a few minutes it hit me&hellip;wait I have the exact value its looking for&hellip; the value of &lsquo;frm2.Tag&rsquo;</p>
+<p>so we take that value:</p>
+<pre><code>BZb+NKtmD9XQ6uQAgJsuvvudb7tZgoD/RCJX
+</code></pre><p>reverse it and run it through and we get:</p>
+<pre><code>PAN{VBA=V3ryb!gAdv3n7ur3s!}
+</code></pre><p>type it in the submission box</p>
+<p>BOOM</p>
+<p>and we get <a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

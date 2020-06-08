@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">2016 Palo Alto Labyrenth CTF Doc 03</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/security/">security</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/CTF/">CTF</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/maldoc/">maldoc</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/Labyrenth/">Labyrenth</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2016 Aug 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a></li>
+</ul>
+<p>So we get the third zip file which contains file named &ldquo;gooby.pdf&rdquo; (hash:<a href="/data/PAN_CTF_DOCTrack_002.zip">3FB332A27A28AF95187F45D79EC8A08ADEF1A4AAD0D4DDD26B832A15CE9DB91A</a>). Well now we need to turn to PDF tools.</p>
+<p>I admit that I&rsquo;m not as well versed with the internal structures of PDF&rsquo;s as I am with Office Documents, but their structure is also simplier. So I first tried <a href="https://github.com/dzzie/pdfstreamdumper">PDFStreamDumper</a> by David Zimmer, but it didn&rsquo;t see the javascript intially. Then I tried <a href="http://eternal-todo.com/tools/peepdf-pdf-analysis-tool">peepdf</a>, but again it didn&rsquo;t get what I needed intially, then I tried the interactive mode and ignoring errors flags:</p>
+<pre><code>python peepdf.py -f -l -i goody.pdf
+</code></pre><p>So peepdf loads the file, and shows some &ldquo;stuff&rdquo;:</p>
+<pre><code>File: gooby.pdf
+MD5: 92b562e12560591699e37b6c2533c191
+SHA1: ca2250317e4d07a6096282035275256896bcdb2e
+SHA256: f575fc6580c192088d60bed8be1791eaa7e5c625331d7c67683f5efb59551247
+Size: 119412 bytes
+Version: 1.7
+Binary: True
+Linearized: False
+Encrypted: False
+Updates: 0
+Objects: 11
+Streams: 7
+URIs: 0
+Comments: 0
+Errors: 3
+
+Version 0:
+        Catalog: 2
+        Info: 4
+        Objects (11): [6, 8, 9, 10, 11, 12, 13, 14, 15]
+        Streams (7): [11, 12, 13, 14, 15, 9, 12]
+                Xref streams (1): [15]
+                Encoded (7): [11, 12, 13, 14, 15, 9, 12]
+        Objects with JS code (1): [11]
+        Suspicious elements:
+                /AA (1): [6]
+                /JS (1): [11]
+                /JavaScript (1): [11]
+
+
+</code></pre><p>so based on this output it looks like object #11 has some javascript, so I type:</p>
+<pre><code>object 11
+</code></pre><p>and get:</p>
+<pre><code>var asdf = &quot;NuemnaufOmt8wek4obWeashiMeivanJeatt6&quot;;
+var ddas =  &quot;bodcuicMong2&quot;;
+var dda22d = &quot;bosOjparj1&quot;
+var obGeujRiary = &quot;akPatMyib5EbJetEteip9idWoncainil7&quot;
+
+function Iadghod3(s) {
+  var v = 0;
+  for (var i=0; i&lt;4; i++) v |= s.charCodeAt(i) &lt;&lt; i*8;
+  return isNaN(v) ? 0 : v;
+}
+
+function Vonsheac6(v) {
+  var s = String.fromCharCode(v &amp; 0xFF, v&gt;&gt;8 &amp; 0xFF, v&gt;&gt;16 &amp; 0xFF, v&gt;&gt;24 &amp; 0xFF)
+;
+  return s;
+}
+
+function RevUfPhas2(DepKacyuv7, ClashJit0) {
+  var v = new Array(2), k = new Array(4), s = &quot;&quot;, i;
+  DepKacyuv7 = escape(DepKacyuv7);
+  for (var i=0; i&lt;4; i++) k[i] = Iadghod3(ClashJit0.slice(i*4,(i+1)*4));
+
+  for (i=0; i&lt;DepKacyuv7.length; i+=8) {
+    v[0] = Iadghod3(DepKacyuv7.slice(i,i+4));
+    v[1] = Iadghod3(DepKacyuv7.slice(i+4,i+8));
+    DikVivec2(v, k);
+    s += Vonsheac6(v[0]) + Vonsheac6(v[1]);
+  }
+  return s;
+}
+
+function jiUteFraj8(tydAcFod3, ClashJit0) {
+  var v = new Array(2), k = new Array(4), s = &quot;&quot;, i;
+
+  for (var i=0; i&lt;4; i++) k[i] = Iadghod3(ClashJit0.slice(i*4,(i+1)*4));
+
+  tydAcFod3 = tydAcFod3;
+  for (i=0; i&lt;tydAcFod3.length; i+=8) {
+    v[0] = Iadghod3(tydAcFod3.slice(i,i+4));
+    v[1] = Iadghod3(tydAcFod3.slice(i+4,i+8));
+    AdCejMod9(v, k);
+    s += Vonsheac6(v[0]) + Vonsheac6(v[1]);
+  }
+
+  s = s.replace(/ +$/, '');
+
+  return unescape(s);
+}
+
+function DikVivec2(v, k) {
+
+  var y = v[0], z = v[1];
+  var delta = 0x9E3779B9, limit = delta*32, sum = 0;
+
+  while (sum != limit) {
+    y += (z&lt;&lt;4 ^ z&gt;&gt;&gt;5)+z ^ sum+k[sum &amp; 3];
+    sum += delta;
+    z += (y&lt;&lt;4 ^ y&gt;&gt;&gt;5)+y ^ sum+k[sum&gt;&gt;&gt;11 &amp; 3];
+  }
+  v[0] = y; v[1] = z;
+}
+
+function AdCejMod9(v, k) {
+  var y = v[0], z = v[1];
+  var delta = 0x9E3779B9, sum = delta*32;
+
+  while (sum != 0) {
+    z -= (y&lt;&lt;4 ^ y&gt;&gt;&gt;5)+y ^ sum+k[sum&gt;&gt;&gt;11 &amp; 3];
+    sum -= delta;
+    y -= (z&lt;&lt;4 ^ z&gt;&gt;&gt;5)+z ^ sum+k[sum &amp; 3];
+  }
+  v[0] = y; v[1] = z;
+}
+
+var atkopNersiv4 = RevUfPhas2(asdf, ddas);
+var fakCapFod9 = jiUteFraj8(ddas, obGeujRiary)
+
+var arnUftad4 = 0x41;
+ItOvyof7 = &quot;)5512{nn666o8.454#$o\&quot;.,n6 5\&quot;)~7|%\x106u6x\x16&amp;\x19\&quot;\x10&quot;;
+var plain = &quot;&quot;;
+for (i = 0; i &lt; ItOvyof7.length; i+=1){
+    plain += String.fromCharCode(ItOvyof7.charCodeAt(i) ^ arnUftad4);
+}
+
+</code></pre><p>so I fired up <a href="https://nodejs.org/">NodeJS</a> and blindly run the javascript (tee hee hee). Of course nothing actually happens, but we can examine some varaibles&hellip;and the last variable output to the screen <code>plain</code> is a url: <code>https://www.youtube.com/watch?v=dQw4w9WgXcQ</code> which is a nice RickRoll. But lets look at what are the values of the other variables, in a nodeJS REPL we simply type: <code>GLOBAL</code> and we get (relevant only):</p>
+<pre><code>{
+  ...
+
+  asdf: 'NuemnaufOmt8wek4obWeashiMeivanJeatt6',
+  ddas: 'bodcuicMong2',
+  dda22d: 'bosOjparj1',
+  obGeujRiary: 'akPatMyib5EbJetEteip9idWoncainil7',
+  Iadghod3: [Function: Iadghod3],
+  Vonsheac6: [Function: Vonsheac6],
+  RevUfPhas2: [Function: RevUfPhas2],
+  jiUteFraj8: [Function: jiUteFraj8],
+  DikVivec2: [Function: DikVivec2],
+  AdCejMod9: [Function: AdCejMod9],
+  atkopNersiv4: '\u000bF©&gt;\u0013ä)bï#Í×¾?ÝR¯&quot;¸¨Ã\u0018=\u000fÞ\u0006Ô*|o-DX5¨',
+  fakCapFod9: 'Z\nùW\u0006\u001c·såå­\u0017IC2',
+  arnUftad4: 65,
+  ItOvyof7: ')5512{nn666o8.454#$o&quot;.,n6 5&quot;)~7|%\u00106u6x\u0016&amp;\u0019&quot;\u0010',
+  plain: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  i: 43 
+}
+</code></pre><p>hmmm&hellip;well if we look at the code the variables <code>atkopNersiv4</code> and <code>fakCapFod9</code> are not used in that final plain text RickRoll, neither is <code>dda22d</code>, so lets play with those for a bit&hellip;.ok that&rsquo;s enough of that&hellip;this didn&rsquo;t go anywhere.</p>
+<p>At this point I started to look at the parsing errors that the various tools had and trying to figure out why they weren&rsquo;t parsing well. Instead of digging too deep here, I decided to see what happens if I round trip the pdf. I open in the Acrobat Reader DC, and save it out as a new file&hellip;then I run those existing tools and notice an interesting object:</p>
+<pre><code>&lt;&lt; /Type /Action
+/S /JavaScript
+/JS ■  i f ( e v e n t . v a l u e = = &quot; P A N { g 0 o b y g o 0 b y d 0 0 w h 3 r 3 r u ? } &quot; ) { a p p . a l e r t ( &quot; y e s &quot; ) ; } e l s e { a p p . a l e r t ( &quot; n o &quot; ) ; }
+ &gt;&gt;
+</code></pre><p>well look at that, a PAN{*} value:</p>
+<pre><code>PAN{g0obygo0byd00wh3r3ru?}
+</code></pre><p>enter it in and</p>
+<p>BOOM</p>
+<p>we get document #4</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

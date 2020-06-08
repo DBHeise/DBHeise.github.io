@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CrazyDave&#39;s InterTube Emporium on </title>
+    <link>https://blog.heiseink.com/</link>
+    <description>Recent content in CrazyDave&#39;s InterTube Emporium on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jun 2020 07:50:01 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Change of Pace</title>
+      <link>https://blog.heiseink.com/posts/2020-06-08-change-of-pace/</link>
+      <pubDate>Mon, 08 Jun 2020 07:50:01 -0400</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2020-06-08-change-of-pace/</guid>
+      <description>For the 102421984th (rough guess) time, I&amp;rsquo;m changing blogging platforms. Any posts that I still have are ported over, but I know there&amp;rsquo;s some of my very older posts that are permanantly lost (for better or worse)&amp;hellip;like the rant I did on getting repeatedly shocked (static electricty) everytime I went to Walmart.
+As I&amp;rsquo;ve been reading over some of these, I decided to keep them all in their orginial text..even if I&amp;rsquo;ve changed my mind or would word things differently.</description>
+    </item>
+    
+    <item>
+      <title>HTML Animations - javascript but how?</title>
+      <link>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</link>
+      <pubDate>Thu, 29 Nov 2018 16:51:29 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</guid>
+      <description>So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div&amp;rsquo;s with javascript moving the div&amp;rsquo;s around the screen and it worked fine&amp;hellip;but I really like SVG&amp;hellip;so I rewrote the page to use SVG instead.
+ Old Page New Page  Now its not taking advantage of any SVG Animations, or any specific animation framework&amp;hellip;because as of this writing there isn&amp;rsquo;t a standardized support across all browsers and platforms: see here</description>
+    </item>
+    
+    <item>
+      <title>HTTPS, GIT, and Enterprise certficates</title>
+      <link>https://blog.heiseink.com/posts/2018-05-18-https-git-and-enterprise-certficates/</link>
+      <pubDate>Fri, 18 May 2018 12:25:23 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2018-05-18-https-git-and-enterprise-certficates/</guid>
+      <description>So I was setting up my GOGS internally so my sons could have a place to push code (and so I could host my many never-completed projects) and I ran across an issue with git not liking my certificate on the HTTPS server. Its not self-signed, but it is from my internal CA. This is windows-land so its already trusted (AD CS) by the OS, but apparently not by the default git install.</description>
+    </item>
+    
+    <item>
+      <title>New HTML Experiments</title>
+      <link>https://blog.heiseink.com/posts/2018-01-22-new-html-experiments/</link>
+      <pubDate>Mon, 22 Jan 2018 15:23:36 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2018-01-22-new-html-experiments/</guid>
+      <description>So I&amp;rsquo;ve recently had a few automation random ideas. The problem was that it was such a small automation and I wanted it to be useable anywhere, so I wrote it in a single HTML page and the code is in Javascript.
+ SVG Path Cleaner - changes all the numbers in a SVG path to be decimal (i.e. rounds the number) Random SVG Page - creates a small random SVG path  </description>
+    </item>
+    
+    <item>
+      <title>My First ScreenSaver - an obsession in VB6</title>
+      <link>https://blog.heiseink.com/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</link>
+      <pubDate>Sun, 21 Aug 2016 20:40:17 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-08-21-my-first-screensaver-an-obsession-in-vb6/</guid>
+      <description>So back when I first started writing code, I was had this obsession with screen savers. I don&amp;rsquo;t really know why but I loved screen savers that were not repetitive, ones that changed over time and did something. Like any of the following:
+ Johnny Castaway by Sierra Online - best writeup, wikipedia the After Dark series by Berkeley Systems - wikipedia SETI@home World Community Grid Various Santa Clause antic&amp;rsquo;s screen savers Various Fish Tank screen savers  &amp;hellip;and my personal favorite:</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 05</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-05/</link>
+      <pubDate>Mon, 15 Aug 2016 15:53:01 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-05/</guid>
+      <description>DOC 01 DOC 02 DOC 03 DOC 04 DOC 05 &amp;lt;- You are here  Again the fifth challenge is a zip file: 01E1B7BCFB39B4A666475991AF11C5762A489F9395C48B4E156526E1C6E4573F
+But I have to first admit that I solved this one third, not fifth&amp;hellip;in fact I got a message when I tried to submit the fifth challenge solution early that I had to do them in order. How did I do them out of order you ask?</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 04</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-04/</link>
+      <pubDate>Mon, 15 Aug 2016 15:52:58 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-04/</guid>
+      <description>DOC 01 DOC 02 DOC 03 DOC 04 &amp;lt;- You are here DOC 05  Ok, so the fourth challenge is again a zip file (hash: 1A2570D5CC6E2C3A185E939DC49CB4B908B867E02AC84BF7ABB532B3395FB01A) and it contains a file fun.docm (hash: 4AE794A701D2F28BA7E6292F0463444F6A567CB7C26188A518270544252877FB). Now the first thing you need to know about the newer office file formats is that they are all zip files. So yes a DOCM and a XLSX and a PPTX, etc are all ZIP files with various contents pieces inside (see here for other zip based documents)</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 03</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-03/</link>
+      <pubDate>Mon, 15 Aug 2016 14:41:16 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-03/</guid>
+      <description>DOC 01 DOC 02 DOC 03 &amp;lt;- You are here DOC 04 DOC 05  So we get the third zip file which contains file named &amp;ldquo;gooby.pdf&amp;rdquo; (hash:3FB332A27A28AF95187F45D79EC8A08ADEF1A4AAD0D4DDD26B832A15CE9DB91A). Well now we need to turn to PDF tools.
+I admit that I&amp;rsquo;m not as well versed with the internal structures of PDF&amp;rsquo;s as I am with Office Documents, but their structure is also simplier. So I first tried PDFStreamDumper by David Zimmer, but it didn&amp;rsquo;t see the javascript intially.</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 02</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-02/</link>
+      <pubDate>Mon, 15 Aug 2016 13:33:34 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-02/</guid>
+      <description>DOC 01 DOC 02 &amp;lt;- You are here DOC 03 DOC 04 DOC 05  So we solved the frist document and then they give us this&amp;hellip;Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E)
+So again, run it through FileId tool and get the VBA code out (using the XML or JSON output options).
+ Sub AutoOpen() &#39; &#39; crackme Macro &#39; &#39; UserForm1.Show End Sub and
+Private Sub button_Click() x = suchcrypto(key.Text, &amp;quot;General Vidal&amp;quot;) If x = &amp;quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&amp;quot; Then MsgBox &amp;quot;Wow.</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF - Doc 01</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-01/</link>
+      <pubDate>Mon, 15 Aug 2016 08:52:00 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-01/</guid>
+      <description>On 2016-07-15 at 5pm EST Palo Alto Networks started a Capture the Flag competition with cash prizes called PAN Labyrenth CTF. When I looked at the challenges I noticed that there was a Documents track, and since there was a cash prize to the frist person to complete a given track I thought I&amp;rsquo;d give it a go..hey $1000 for a few hours is not bad. It only took me a few hours (actually more than I intended because I got stuck overthinking one of the problems), but I don&amp;rsquo;t think I was the first one to complete the track.</description>
+    </item>
+    
+    <item>
+      <title>Stuff and things yet to do</title>
+      <link>https://blog.heiseink.com/posts/2016-08-13-stuff-and-things-yet-to-do/</link>
+      <pubDate>Sat, 13 Aug 2016 14:08:12 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-08-13-stuff-and-things-yet-to-do/</guid>
+      <description>so one of the things this blog is going to try to accomplish is collect all the various items that I&amp;rsquo;ve put on various places in the web. This means old school projects/papers/writings/thoughts as well as linking to &amp;amp; copying of content that I&amp;rsquo;ve produced that lives elsewhere on the web.
+We&amp;rsquo;ll see how it goes&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>first</title>
+      <link>https://blog.heiseink.com/posts/2016-08-13-first/</link>
+      <pubDate>Sat, 13 Aug 2016 13:29:53 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-08-13-first/</guid>
+      <description>so i&amp;rsquo;m trying to start to blog again&amp;hellip;not because I want to talk, but because I want one consistant place to put everything&amp;hellip;
+we&amp;rsquo;ll see how it goes!</description>
+    </item>
+    
+    <item>
+      <title>Allegory vs Parable</title>
+      <link>https://blog.heiseink.com/posts/2010-11-29-allegory-vs-parable/</link>
+      <pubDate>Sun, 28 Nov 2010 21:48:47 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-29-allegory-vs-parable/</guid>
+      <description>So not being a literary scholar in any way, shape, or form&amp;hellip;not even on TV or the Inter-Webs&amp;hellip;It has never clicked what exactly an allegory was or why it was different from a parable, so I decided to use the vast misshapen knowledge wasteland known as the internet to scavenge a bit of meaning and difference. Here&amp;rsquo;s what I found:Yahoo! Answers- parable is a subset of allegory, but its shorter and usually only conveys a single ideaThe Narnia Academy- again parables are shorter and only convey a single point; this says it well (from the article)In essence, parables simply compare one event or action or theme to another while allegory uses characters or events to illustrate the topic or theme.</description>
+    </item>
+    
+    <item>
+      <title>Logic of 3 year olds</title>
+      <link>https://blog.heiseink.com/posts/2010-11-27-logic-of-3-year-olds/</link>
+      <pubDate>Fri, 26 Nov 2010 21:31:28 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-27-logic-of-3-year-olds/</guid>
+      <description>&amp;ldquo;We&amp;rsquo;re going to [the grocery store] because you&amp;rsquo;re a boy and I&amp;rsquo;m a girl&amp;rdquo;
+Isn&amp;rsquo;t that always the case&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>More Snow, Less ...</title>
+      <link>https://blog.heiseink.com/posts/2010-11-22-more-snow-less/</link>
+      <pubDate>Mon, 22 Nov 2010 06:34:11 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-22-more-snow-less/</guid>
+      <description>So i was hoping for more snow last night. Though it was cold enough, there wasn&amp;rsquo;t any precipitation. Oh well, guess I&amp;rsquo;ve got to go to schoolwork today&amp;hellip;
+[edit] So now its really snowing, but I&amp;rsquo;ve already biked to the bus stop&amp;hellip;mental note: next time wear gloves&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Musical Encoding</title>
+      <link>https://blog.heiseink.com/posts/2010-11-21-musical-encoding/</link>
+      <pubDate>Sun, 21 Nov 2010 12:42:09 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-21-musical-encoding/</guid>
+      <description>Text -&amp;gt; Music -&amp;gt; Text Music -&amp;gt; Text -&amp;gt; Music  So #2 is pretty common and there are a few variants that work and are completely reversible (e.g. MIDI) and even more that are not very easily reversible (e.g. most Audio file formats [MP3, WAV, etc]). The primary difference is that the later are designed to be digital transforms for auditory sound (i.e. any noise), where as the former are specifically for music, or the written interpretation of music.</description>
+    </item>
+    
+    <item>
+      <title>Let it snow!</title>
+      <link>https://blog.heiseink.com/posts/2010-11-21-let-it-snow/</link>
+      <pubDate>Sun, 21 Nov 2010 11:18:18 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-21-let-it-snow/</guid>
+      <description>It was snowing when we woke up this morning! w00t! It&amp;rsquo;s not sticking but I&amp;rsquo;ll take what I can get! :)</description>
+    </item>
+    
+    <item>
+      <title>My Wife is awesome...</title>
+      <link>https://blog.heiseink.com/posts/2010-11-20-my-wife-is-awesome/</link>
+      <pubDate>Sat, 20 Nov 2010 11:17:25 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-20-my-wife-is-awesome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Choices</title>
+      <link>https://blog.heiseink.com/posts/2010-11-16-choices/</link>
+      <pubDate>Tue, 16 Nov 2010 06:22:14 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-16-choices/</guid>
+      <description>Choices have consequences
+Right, Responsibility, and Results of Choice
+Agency = the right to choose; next to life itself, the right to direct that life is a Great gift of God; Imposed Salvation = plan of adversary&amp;hellip;anti-agency; though suffering He became the great redeemer; men are free to choose liberty and life (and thus joy), or captivity and death (and thus misery);
+we cannot be neutral - there is no middle ground; guidance is available to assist in our safe return - prayer, promptings, and scriptures; we have all the tools nessesary to make correct choices; we have sufficient to know good from evil; we cannot afford the luxury of a detour; don&amp;rsquo;t be pacified; momentary/temporary results or long-term results; &amp;ldquo;if you do not know where you want to go, it doesn&amp;rsquo;t matter which path you take&amp;rdquo; - chesire cat; by choosing our path, we choose our destination; courage to say no, courage to say yes; descisions determine destiny; what is your end goal?</description>
+    </item>
+    
+    <item>
+      <title>Kid Quote A0492n-29</title>
+      <link>https://blog.heiseink.com/posts/2010-11-13-kid-quote-a0492n-29/</link>
+      <pubDate>Sat, 13 Nov 2010 19:19:41 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-13-kid-quote-a0492n-29/</guid>
+      <description>&amp;quot;Sometimes you gotta cry, sometimes you gotta poop.</description>
+    </item>
+    
+    <item>
+      <title>BMP encoding</title>
+      <link>https://blog.heiseink.com/posts/2010-10-12-bmp-encoding/</link>
+      <pubDate>Tue, 12 Oct 2010 16:30:10 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-12-bmp-encoding/</guid>
+      <description>So this one is pretty obvious, but here it is:
+ Add BMP Header  </description>
+    </item>
+    
+    <item>
+      <title>Candyland...best game ever...</title>
+      <link>https://blog.heiseink.com/posts/2010-10-11-candyland-best-game-ever/</link>
+      <pubDate>Mon, 11 Oct 2010 18:56:38 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-11-candyland-best-game-ever/</guid>
+      <description>Played a game of candyland with the fam&amp;hellip;but with real candy! Best game ever (only with candy!) :)</description>
+    </item>
+    
+    <item>
+      <title>Hardwigg Transform</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-hardwigg-transform/</link>
+      <pubDate>Sat, 09 Oct 2010 08:58:40 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-hardwigg-transform/</guid>
+      <description>We need to tranform this:
+To This:</description>
+    </item>
+    
+    <item>
+      <title>Encoded Encryption</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-encoded-encryption/</link>
+      <pubDate>Sat, 09 Oct 2010 07:55:51 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-encoded-encryption/</guid>
+      <description>So here&amp;rsquo;s an encoding method that can render an encrypted message to be only encoded:
+  Encrypt message (any valid encryption) with key &amp;ldquo;A&amp;rdquo;, _where &amp;ldquo;A&amp;rdquo; is a valid encoding method used in step 2
+  Encode message with encoding method A
+  There you go, you can now render that great security by encryption completely useless :)</description>
+    </item>
+    
+    <item>
+      <title>Arne Saknussemm</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-arne-saknussemm/</link>
+      <pubDate>Sat, 09 Oct 2010 07:45:47 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-arne-saknussemm/</guid>
+      <description>Today&amp;rsquo;s encoding method brought to you by&amp;hellip;a book In Jules Verne book Journey to the Center of the Earth(wikipedia, project gutenburg) the protaganists find an &amp;lsquo;encrypted&amp;rsquo; message from a finctional scientist Arne Saknussemm.
+The message isn&amp;rsquo;t really encrypted but encoded using the following encoding/decoding scheme:
+ Translate message to Latin Write it backwards Apply Hardwigg transform (more on that later) Translate characters to Runic (again, more later)  And there you go&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Porting only the interesting posts...maybe</title>
+      <link>https://blog.heiseink.com/posts/2010-10-07-porting-only-the-interesting-posts-maybe/</link>
+      <pubDate>Thu, 07 Oct 2010 07:57:17 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-07-porting-only-the-interesting-posts-maybe/</guid>
+      <description>So as I have this new blog (again), I haven&amp;rsquo;t decided if I&amp;rsquo;ll port over the old posts from previous blogs&amp;hellip;probably not, `cuz I&amp;rsquo;m lazy&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Is it going to be a long day?</title>
+      <link>https://blog.heiseink.com/posts/2010-10-06-is-it-going-to-be-a-long-day/</link>
+      <pubDate>Wed, 06 Oct 2010 08:12:04 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-06-is-it-going-to-be-a-long-day/</guid>
+      <description>Will it be a long day
+Or just another hey hey
+Will time zip on by
+Or punch me squarly in the eye</description>
+    </item>
+    
+    <item>
+      <title>Business Logic Flaw Found</title>
+      <link>https://blog.heiseink.com/posts/2010-02-09-business-logic-flaw-found/</link>
+      <pubDate>Tue, 09 Feb 2010 09:19:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-02-09-business-logic-flaw-found/</guid>
+      <description>Found a business logic flaw in a major online &amp;ldquo;pay-for-content&amp;rdquo; site (not p0rn), though I can verify that it has problems in their parent family of sites, I wonder how many other sites have this problem&amp;hellip;probably most of them&amp;hellip;
+Waiting for a response from the vulnerable company before I post details</description>
+    </item>
+    
+    <item>
+      <title>Blatent Boasting...</title>
+      <link>https://blog.heiseink.com/posts/2009-12-16-blatent-boasting/</link>
+      <pubDate>Wed, 16 Dec 2009 14:59:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-16-blatent-boasting/</guid>
+      <description>So, after much ado, it&amp;rsquo;s live: http://blogs.technet.com/office2010/archive/2009/12/16/office-2010-file-validation.aspx
+Its what I&amp;rsquo;ve been working on for some time&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>TOR vs Proxies vs Freenet</title>
+      <link>https://blog.heiseink.com/posts/2009-12-10-tor-vs-proxies-vs-freenet/</link>
+      <pubDate>Thu, 10 Dec 2009 07:28:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-10-tor-vs-proxies-vs-freenet/</guid>
+      <description>So I&amp;rsquo;ve been playing with proxy chaining recently and some have suggested just using TOR (or Freenet). I just wanted to point out that though TOR and FREENET do a decent job of making multi-hops automatic, you have to install software. So from a pure attacker&amp;rsquo;s POV its not as useful. Though it might be a good starting point, it would be more difficult to use it in an attack.</description>
+    </item>
+    
+    <item>
+      <title>Its not VERSUS its PLUS</title>
+      <link>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</link>
+      <pubDate>Wed, 09 Dec 2009 03:28:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</guid>
+      <description>From Schiener on Security - My Reaction to Eric Schmidt:
+Too many wrongly characterize the debate as &amp;ldquo;security versus privacy.&amp;rdquo; The real choice is liberty versus control. Tyranny, whether it arises under threat of foreign physical attack or under constant domestic authoritative scrutiny, is still tyranny. Liberty requires security without intrusion, security plus privacy. Widespread police surveillance is the very definition of a police state. And that&amp;rsquo;s why we should champion privacy even when we have nothing to hide.</description>
+    </item>
+    
+    <item>
+      <title>Powershell script to Convert MOV audio files to MP3 using VLC</title>
+      <link>https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</link>
+      <pubDate>Tue, 01 Dec 2009 13:44:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/</guid>
+      <description>So I&amp;rsquo;ve had a need lately to convert MOV audio files to MP3. At first I searched for self contained solutions online and everything looked and worked like carp-on-a-stick. So here&amp;rsquo;s what I came up with&amp;hellip;use VLC, then I put it in a powershell script.
+Here&amp;rsquo;s the commandline for VLC to do the work:
+vlc -I dummy &amp;lt;INPUTFILE&amp;gt; &amp;quot;:sout=#transcode{acodec=mp3,ab=128,channels=6}:standard{access=file,mux=asf,dst=&amp;lt;OUTPUTFILE&amp;gt;}&amp;quot; vlc://quitThen I just wrapped this around a &amp;ldquo;gci&amp;rdquo; on an input folder and viola!</description>
+    </item>
+    
+    <item>
+      <title>Hard Drive Failures</title>
+      <link>https://blog.heiseink.com/posts/2009-12-01-hard-drive-failures/</link>
+      <pubDate>Tue, 01 Dec 2009 13:16:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-01-hard-drive-failures/</guid>
+      <description>So most &amp;ldquo;techies&amp;rdquo; know that all things have a lifespan, electronics especially. So if you&amp;rsquo;re not backing up your data, you will be soon (or loosing that data). My family recently had a 1TB USB external disk fail. Turns out that the &amp;ldquo;disk&amp;rdquo; was actually two 500GB disks RAID&amp;rsquo;ed together. After some investigation it turns out that DISK1 has hardware failures, and DISK2 is fine. But since its RAID&amp;rsquo;ed together none of the data on DISK2 is available.</description>
+    </item>
+    
+    <item>
+      <title>Happy Thanksgiving!!!</title>
+      <link>https://blog.heiseink.com/posts/2009-11-26-happy-thanksgiving/</link>
+      <pubDate>Thu, 26 Nov 2009 09:00:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-11-26-happy-thanksgiving/</guid>
+      <description>Happy Thanksgiving Everyone!
+Things I&amp;rsquo;m thankful for (the short list):
+ My Wife My Children Family God &amp;amp; all that He has done (Yea, that&amp;rsquo;s everything&amp;hellip;) A House to live in A job (a very good one at that!) Food (you knew that was going to be in there didn&amp;rsquo;t you!) Prayer Scriptures Technology Gadgets Freedom  </description>
+    </item>
+    
+    <item>
+      <title>The things you overhear</title>
+      <link>https://blog.heiseink.com/posts/2009-11-26-the-things-you-overhear/</link>
+      <pubDate>Thu, 26 Nov 2009 08:58:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-11-26-the-things-you-overhear/</guid>
+      <description>&amp;ldquo;You&amp;rsquo;re ugly for a pinapple&amp;rdquo;
+Aren&amp;rsquo;t we all?! </description>
+    </item>
+    
+    <item>
+      <title>Unlimited power!!! Muhaha!</title>
+      <link>https://blog.heiseink.com/posts/2009-11-20-unlimited-power-muhaha/</link>
+      <pubDate>Fri, 20 Nov 2009 09:24:00 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-11-20-unlimited-power-muhaha/</guid>
+      <description>So this article &amp;ldquo;Remote uses no power&amp;rdquo; makes me wonder how much power is actually generated. I mean if I replaced all my floors in my house with something like this, what would it power? Or what if every peice of exercise equipment in a gym also produced energy? How much would that be?
+It also reminds me of an idea that I sketched out about 10+ years ago where you would wear a suit that generated electricty from your movements (i.</description>
+    </item>
+    
+    <item>
+      <title>Woodworking, Powershell, and Security</title>
+      <link>https://blog.heiseink.com/posts/2009-11-16-woodworking-powershell-and-security/</link>
+      <pubDate>Mon, 16 Nov 2009 06:15:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-11-16-woodworking-powershell-and-security/</guid>
+      <description>I wonder if I can put my hobbies into a single project&amp;hellip;hmmm&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Still alive, still have nothing to say</title>
+      <link>https://blog.heiseink.com/posts/2009-11-16-still-alive-still-have-nothing-to-say/</link>
+      <pubDate>Mon, 16 Nov 2009 06:11:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-11-16-still-alive-still-have-nothing-to-say/</guid>
+      <description>Yep, I&amp;rsquo;m here&amp;hellip;.yep, nothing interesting to say this morning&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Posting Old Posts</title>
+      <link>https://blog.heiseink.com/posts/2009-08-03-posting-old-posts/</link>
+      <pubDate>Mon, 03 Aug 2009 15:20:00 -0400</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-08-03-posting-old-posts/</guid>
+      <description>I&amp;rsquo;ve decided that I won&amp;rsquo;t port over the vast majority of my old posts, this being the 7th incarnation of my blog, mainly because there&amp;rsquo;s no value in it. The only reason I would do it would be to show that I&amp;rsquo;ve been blogging for quite some time&amp;hellip;which isn&amp;rsquo;t a good enough reason&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Keeping Big Brother Out</title>
+      <link>https://blog.heiseink.com/posts/2009-08-03-keeping-big-brother-out/</link>
+      <pubDate>Mon, 03 Aug 2009 11:54:00 -0400</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-08-03-keeping-big-brother-out/</guid>
+      <description>Keeping Big Brother Out: A VERY Brief Guide to Privacy Online The Principles  Once something is online, it is eternal! This goes for all email, tweets, blog posts, forum posts, comments, etc Encrypt everything you want private, if its not encrypted assume others read it and know it came from you! Again this goes for all email, tweets, blog posts and comments, forum posts and comments, anything everywhere. Encoding is not Encryption!</description>
+    </item>
+    
+  </channel>
+</rss>

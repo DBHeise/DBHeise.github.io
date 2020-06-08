@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">Musical Encoding</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/crypto/">crypto</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/encoding/">encoding</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2010 Nov 21</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <ol>
+<li>Text -&gt; Music -&gt; Text</li>
+<li>Music -&gt; Text -&gt; Music</li>
+</ol>
+<p>So #2 is pretty common and there are a few variants that work and are completely reversible (e.g. <a href="http://en.wikipedia.org/wiki/Musical_Instrument_Digital_Interface">MIDI</a>) and even more that are not very easily reversible (e.g. most Audio file formats [MP3, WAV, etc]). The primary difference is that the later are designed to be digital transforms for auditory sound (i.e. any noise), where as the former are specifically for music, or the written interpretation of music. I would be the first to point out the HUGE difference between written music and performed music, as the subtle nuances in the voice are quite noticeable (e.g. a frog croaking at <a href="http://en.wikipedia.org/wiki/440_Hz">440 Hz</a> is quite different than a professional performing a perfect <a href="http://en.wikipedia.org/wiki/A440_%28Concert_A%29">Concert A</a>). So I&rsquo;m going to leave that subject for another post on another day&hellip;</p>
+<p>The more interesting one for me is the transformation of text (or any input data stream) to a reversible (or irreversible) musical representation. If we make certain assumptions about the input (i.e. its a text message&hellip;like <a href="http://en.wikipedia.org/wiki/Hamlet">Hamlet</a> [<a href="http://www.gutenberg.org/ebooks/1524">full-text</a> by Shakespeare] or a <a href="http://randomtweets.com/">random tweet</a>) then perhaps certain properties could be inferred and thus a transform might be easier by using some sort of map. For example the letter &lsquo;a&rsquo; might be transformed to a specific musical note, or perhaps the word &ldquo;an&rdquo; would be transformed to a quarter note of a specific note. You could even go so far as to produce some sort of scheme such that multiple voices/instruments are used (e.g. maybe each paragraph is a different instrument&hellip;or something)</p>
+<p>If the input data wasn&rsquo;t text, but some arbitrary data then perhaps a simple transform like adding a certain file format&rsquo;s header <em>might</em> be sufficient. I just wonder if it would sound good!?</p>
+<p>The really cool thing would be if you had a musical transform such that different variations of similar data would produce similar variations of the musical score. For example a movie of Hamlet, or a video of a particular stage performance, might produce auditory similar variations as the raw text of Hamlet.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

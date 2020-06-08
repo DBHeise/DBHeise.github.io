@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    <link rel="alternate" type="application/rss+xml" href="https://blog.heiseink.com/tags/powershell/index.xml" title="" />
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">powershell</h1>
+      
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    
+      <div class="box">
+  <article class="post">
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <h2><a href='https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/'> Powershell script to Convert MOV audio files to MP3 using VLC</a></h2>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">2009 Dec 1</div>        
+      </div>
+    </div>
+
+    <div class="media-content">
+      <div class="content">
+        So I&rsquo;ve had a need lately to convert MOV audio files to MP3. At first I searched for self contained solutions online and everything looked and worked like carp-on-a-stick. So here&rsquo;s what I came up with&hellip;use VLC, then I put it in a powershell script.
+Here&rsquo;s the commandline for VLC to do the work:
+vlc -I dummy &lt;INPUTFILE&gt; &quot;:sout=#transcode{acodec=mp3,ab=128,channels=6}:standard{access=file,mux=asf,dst=&lt;OUTPUTFILE&gt;}&quot; vlc://quitThen I just wrapped this around a &ldquo;gci&rdquo; on an input folder and viola!
+      </div>
+    </div>
+    <a href='https://blog.heiseink.com/posts/2009-12-01-powershell-script-to-convert-mov-audio-files-to-mp3-using-vlc/'><nobr>Read more →</nobr></a>
+  </article>
+</div>
+    
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>encoding on </title>
+    <link>https://blog.heiseink.com/tags/encoding/</link>
+    <description>Recent content in encoding on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Nov 2010 12:42:09 -0800</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/tags/encoding/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Musical Encoding</title>
+      <link>https://blog.heiseink.com/posts/2010-11-21-musical-encoding/</link>
+      <pubDate>Sun, 21 Nov 2010 12:42:09 -0800</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-11-21-musical-encoding/</guid>
+      <description>Text -&amp;gt; Music -&amp;gt; Text Music -&amp;gt; Text -&amp;gt; Music  So #2 is pretty common and there are a few variants that work and are completely reversible (e.g. MIDI) and even more that are not very easily reversible (e.g. most Audio file formats [MP3, WAV, etc]). The primary difference is that the later are designed to be digital transforms for auditory sound (i.e. any noise), where as the former are specifically for music, or the written interpretation of music.</description>
+    </item>
+    
+    <item>
+      <title>BMP encoding</title>
+      <link>https://blog.heiseink.com/posts/2010-10-12-bmp-encoding/</link>
+      <pubDate>Tue, 12 Oct 2010 16:30:10 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-12-bmp-encoding/</guid>
+      <description>So this one is pretty obvious, but here it is:
+ Add BMP Header  </description>
+    </item>
+    
+    <item>
+      <title>Hardwigg Transform</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-hardwigg-transform/</link>
+      <pubDate>Sat, 09 Oct 2010 08:58:40 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-hardwigg-transform/</guid>
+      <description>We need to tranform this:
+To This:</description>
+    </item>
+    
+    <item>
+      <title>Encoded Encryption</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-encoded-encryption/</link>
+      <pubDate>Sat, 09 Oct 2010 07:55:51 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-encoded-encryption/</guid>
+      <description>So here&amp;rsquo;s an encoding method that can render an encrypted message to be only encoded:
+  Encrypt message (any valid encryption) with key &amp;ldquo;A&amp;rdquo;, _where &amp;ldquo;A&amp;rdquo; is a valid encoding method used in step 2
+  Encode message with encoding method A
+  There you go, you can now render that great security by encryption completely useless :)</description>
+    </item>
+    
+    <item>
+      <title>Arne Saknussemm</title>
+      <link>https://blog.heiseink.com/posts/2010-10-09-arne-saknussemm/</link>
+      <pubDate>Sat, 09 Oct 2010 07:45:47 -0700</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-10-09-arne-saknussemm/</guid>
+      <description>Today&amp;rsquo;s encoding method brought to you by&amp;hellip;a book In Jules Verne book Journey to the Center of the Earth(wikipedia, project gutenburg) the protaganists find an &amp;lsquo;encrypted&amp;rsquo; message from a finctional scientist Arne Saknussemm.
+The message isn&amp;rsquo;t really encrypted but encoded using the following encoding/decoding scheme:
+ Translate message to Latin Write it backwards Apply Hardwigg transform (more on that later) Translate characters to Runic (again, more later)  And there you go&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

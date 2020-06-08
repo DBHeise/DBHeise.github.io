@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">HTTPS, GIT, and Enterprise certficates</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/git/">git</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/gogs/">gogs</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/X509/">X509</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2018 May 18</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <p>So I was setting up my <a href="http://gogs.io">GOGS</a> internally so my sons could have a place to push code (and so I could host my many never-completed projects) and I ran across an issue with git not liking my certificate on the HTTPS server. Its not self-signed, but it is from my internal CA. This is windows-land so its already trusted (AD CS) by the OS, but apparently not by the default git install. The specific issue was this [with some redaction]:</p>
+<pre><code>Cloning into '{PROJECT}'...
+fatal: unable to access 'https://{SERVER}/{USER}/{PROJECT.git/': SSL certificate problem: unable to get local issuer certificate
+</code></pre><p>So I of course did some intertube-searching and came accross many an article about this same problem:</p>
+<ul>
+<li><a href="https://blogs.msdn.microsoft.com/tfssetup/2016/12/19/error-ssl-certificate-problem-unable-to-get-local-issuer-certificate/">Error: SSL certificate problem: unable to get local issuer certificate</a></li>
+<li><a href="https://blogs.msdn.microsoft.com/phkelley/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exes-store/">Adding a corporate (or self-signed) certificate authority to git.exe�s store</a></li>
+<li><a href="https://blogs.technet.microsoft.com/dcaro/2015/12/13/git263-win10/">Git for Windows 2.6.3 on Win10</a></li>
+<li><a href="https://stackoverflow.com/questions/7526182/git-ssl-error-on-windows?noredirect=1&amp;lq=1">Git ssl error on windows</a></li>
+<li><a href="https://writeabout.net/2017/02/03/git-for-windows-with-tfs-and-ssl-behind-a-proxy/">GIT FOR WINDOWS WITH TFS AND SSL BEHIND A PROXY</a></li>
+<li><a href="https://stackoverflow.com/questions/9072376/configure-git-to-accept-a-particular-self-signed-server-certificate-for-a-partic">Git and https / SSL</a></li>
+</ul>
+<p>The all pretty much suggested the same thing (though depending on the date of the article the exact details change), use a custom CRT file with your root cert&hellip;well guess what&hellip;IT DID NOT WORK!!!</p>
+<p>So it was mildly frustrating that everyone keeps saying to do the same thing and it will work. People were even commenting on how it worked for them&hellip;yet it doesn&rsquo;t for me&hellip;HENCE THIS BLOG POST!!!</p>
+<p>After tooling around with <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/procmon">ProcMon</a> and watching the git executables NOT read the CRT over and over again (despite being correctly set in .gitconfig) I was leaning towards a bug in git&hellip;but just because I can blame someone else for the problem doesn&rsquo;t help me solve the issue.</p>
+<p>I next went and took a look at all the different settings that were currently set in the various git config files:</p>
+<pre><code>git config --list --show-origin
+</code></pre><p>From this I ran across the setting <code>http.sslbackend</code> and began to wonder what other backends were available since openssl isn&rsquo;t doing the trick for me. That line of thinking lead me to this post: <a href="https://github.com/git-for-windows/git/issues/1274">git not working after setting http.sslBackend config</a>&hellip;which had this command: <code>git config --global http.sslBackend schannel</code></p>
+<p>oh boy&hellip;use the windows native schannel as the SSL backend&hellip;I&rsquo;m sold&hellip;and guess what&hellip;IT WORKS!!!</p>
+<p>So there you go, no mucking around with custom CRT files just use what you&rsquo;ve already got setup in the windows cert stores!</p>
+<p>YMMV</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Editor</title>
+    <style>
+        div {
+            padding: 0.5%;
+            margin: 0.5%;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <textarea id="cmdHistory" rows="5" style="width:100%" disabled></textarea>
+    </div>
+    <div>
+        <textarea id="editor" rows="1" style="width:100%"></textarea>
+    </div>
+
+    <script>
+        var edtr = document.getElementById("editor")
+        var hist = document.getElementById("cmdHistory")
+        edtr.addEventListener("keypress", function (e) {
+            if (e.code == "Enter") {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    e.target.rows++
+                    e.target.value += "\n"
+                } else {
+                    hist.value += e.target.value + "\n"
+                    e.target.rows = 1
+                    e.target.value = ""
+                }
+            }
+        }, { capture: true, passive: false })
+    </script>
+</body>
+
+</html>

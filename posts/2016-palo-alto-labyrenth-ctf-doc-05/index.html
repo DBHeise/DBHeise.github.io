@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://blog.heiseink.com/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                    <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+                
+                    <a class="navbar-item" href="/projects/" title="">Projects</a>
+                
+                    <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+                
+            </div>
+            <div class="navbar-end">
+            </div>
+        </div>
+    </nav>
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">2016 Palo Alto Labyrenth CTF Doc 05</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/security/">security</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/CTF/">CTF</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/maldoc/">maldoc</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/Labyrenth/">Labyrenth</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2016 Aug 15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <ul>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-01/">DOC 01</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-02/">DOC 02</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-03/">DOC 03</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-04/">DOC 04</a></li>
+<li><a href="/2016/08/15/2016-Palo-Alto-Labyrenth-CTF-Doc-05/">DOC 05</a> &lt;- You are here</li>
+</ul>
+<p>Again the fifth challenge is a zip file: <a href="/data/PAN_CTF_DOCTrack_005.zip">01E1B7BCFB39B4A666475991AF11C5762A489F9395C48B4E156526E1C6E4573F</a></p>
+<p>But I have to first admit that I solved this one third, not fifth&hellip;in fact I got a message when I tried to submit the fifth challenge solution early that I had to do them in order. How did I do them out of order you ask? well remember in the very first document there was an extra <code>.7z</code> file inside the zip. This was a 7Zip archive that contained ALL of the challenges (go look for yourself).</p>
+<p>So running it through <a href="https://github.com/DBHeise/fileid">FileId</a> showed only a little bit of macros:</p>
+<pre><code>Sub excelulate()
+
+    Application.Quit
+
+End Sub
+</code></pre><p>So I crack the file open in Microsoft Excel&hellip;.hmmm its only asking for a value and a button. You click the button and it says you stink and opens calc.exe. Wait what? there&rsquo;s no macro&rsquo;s how is this happening? So I open the file in eDoc. What is eDoc you say? its a GUI application for looking at the streams and folders inside an Ole Structured Storage container. I don&rsquo;t have a link for it as the company that produced it no longer exists, but I still have the binary&hellip;besides a very similar tool is <a href="http://www.mitec.cz/ssv.html">SSView</a> by MiTec (in fact is in many ways better&hellip;but eDoc lets me search for hex/ascii values and do inline editing).</p>
+<p>So perusing through the hex view of the <code>Workbook</code> stream (i.e. where the actual workbooks live) we can easily see calc.exe (around stream offset 0x5b90 as well as other places) and several other strings that were NOT on the three sheets when we opened Excel eariler&hellip;.HIDDEN SHEETS.</p>
+<p>So open up excel, right click on and of the sheet names and click <code>unhide</code>&hellip;a little dialog opens up and we can unhide the <code>secret</code> sheet. But wait it looks empty. So we start looking through the formula values and eventually you will find cell A14 with this formula:</p>
+<pre><code>=IF(RUN(supersecret!F13))
+</code></pre><p>So here you need to know excel forumlas and you will see that the notation they&rsquo;re using shows there is ANOTHER hidden sheet. what? how can this be you ask? well turns out that excel has something called a VeryHidden sheet (see <a href="https://support.microsoft.com/en-us/kb/213609">KB213609</a>, or just search the InterTubes yourself)</p>
+<p>Hmmm, so how do we unhide a very hidden sheet? well just fix it in VBA. So there&rsquo;s already a function <code>excelulate</code> so I simply changed it to:</p>
+<pre><code>Sub excelulate()
+    ActiveWorkbook.Sheets(&quot;supersecret&quot;).Visible = True
+End Sub
+</code></pre><p>and then run it!</p>
+<p>so we look at the newly discovered sheet and we find the crazy formula in F13:</p>
+<pre><code>=RETURN(EXACT(CONCATENATE(D7,A5,C5,B4,E20,B6,A8,B8,A12,B10,E10,C9,B13,D12,C11,B16,A25,A18,B19,C20,B21,B2,D23,B24,E4,B26,D16,A21,C14,A16),Sheet1!B3))
+</code></pre><p>So I copy this into another cell in the same sheet, but modifiy at so:</p>
+<pre><code>=CONCATENATE(D7,A5,C5,B4,E20,B6,A8,B8,A12,B10,E10,C9,B13,D12,C11,B16,A25,A18,B19,C20,B21,B2,D23,B24,E4,B26,D16,A21,C14,A16)
+</code></pre><p>but wait it doesn&rsquo;t run it! this sheet is showing the forumlas instead of running them. No problem, I go back to the <code>Sheet1</code> sheet and pick an empty cell and enter the formula:</p>
+<pre><code>=supersecret!F16
+</code></pre><p>and poof! we have this value:</p>
+<pre><code>PAN{Exc3l4=3x7r3me1y4An7a5+!c}
+</code></pre><p>we enter it into the CTF dialog</p>
+<p>BOOM</p>
+<p>completed!</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    
+</body>
+</html>

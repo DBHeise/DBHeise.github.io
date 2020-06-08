@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>animation on </title>
+    <link>https://blog.heiseink.com/tags/animation/</link>
+    <description>Recent content in animation on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Nov 2018 16:51:29 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/tags/animation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTML Animations - javascript but how?</title>
+      <link>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</link>
+      <pubDate>Thu, 29 Nov 2018 16:51:29 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2018-11-29-html-animations-javascript-but-how/</guid>
+      <description>So I was working on a side project that I use as a landing page for a placeholder website. I was orginially using just div&amp;rsquo;s with javascript moving the div&amp;rsquo;s around the screen and it worked fine&amp;hellip;but I really like SVG&amp;hellip;so I rewrote the page to use SVG instead.
+ Old Page New Page  Now its not taking advantage of any SVG Animations, or any specific animation framework&amp;hellip;because as of this writing there isn&amp;rsquo;t a standardized support across all browsers and platforms: see here</description>
+    </item>
+    
+  </channel>
+</rss>

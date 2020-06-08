@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vulnerablity on </title>
+    <link>https://blog.heiseink.com/tags/vulnerablity/</link>
+    <description>Recent content in vulnerablity on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 09 Feb 2010 09:19:00 -0500</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/tags/vulnerablity/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Business Logic Flaw Found</title>
+      <link>https://blog.heiseink.com/posts/2010-02-09-business-logic-flaw-found/</link>
+      <pubDate>Tue, 09 Feb 2010 09:19:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2010-02-09-business-logic-flaw-found/</guid>
+      <description>Found a business logic flaw in a major online &amp;ldquo;pay-for-content&amp;rdquo; site (not p0rn), though I can verify that it has problems in their parent family of sites, I wonder how many other sites have this problem&amp;hellip;probably most of them&amp;hellip;
+Waiting for a response from the vulnerable company before I post details</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>security on </title>
+    <link>https://blog.heiseink.com/tags/security/</link>
+    <description>Recent content in security on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Aug 2016 15:53:01 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 05</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-05/</link>
+      <pubDate>Mon, 15 Aug 2016 15:53:01 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-05/</guid>
+      <description>DOC 01 DOC 02 DOC 03 DOC 04 DOC 05 &amp;lt;- You are here  Again the fifth challenge is a zip file: 01E1B7BCFB39B4A666475991AF11C5762A489F9395C48B4E156526E1C6E4573F
+But I have to first admit that I solved this one third, not fifth&amp;hellip;in fact I got a message when I tried to submit the fifth challenge solution early that I had to do them in order. How did I do them out of order you ask?</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 04</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-04/</link>
+      <pubDate>Mon, 15 Aug 2016 15:52:58 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-04/</guid>
+      <description>DOC 01 DOC 02 DOC 03 DOC 04 &amp;lt;- You are here DOC 05  Ok, so the fourth challenge is again a zip file (hash: 1A2570D5CC6E2C3A185E939DC49CB4B908B867E02AC84BF7ABB532B3395FB01A) and it contains a file fun.docm (hash: 4AE794A701D2F28BA7E6292F0463444F6A567CB7C26188A518270544252877FB). Now the first thing you need to know about the newer office file formats is that they are all zip files. So yes a DOCM and a XLSX and a PPTX, etc are all ZIP files with various contents pieces inside (see here for other zip based documents)</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 03</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-03/</link>
+      <pubDate>Mon, 15 Aug 2016 14:41:16 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-03/</guid>
+      <description>DOC 01 DOC 02 DOC 03 &amp;lt;- You are here DOC 04 DOC 05  So we get the third zip file which contains file named &amp;ldquo;gooby.pdf&amp;rdquo; (hash:3FB332A27A28AF95187F45D79EC8A08ADEF1A4AAD0D4DDD26B832A15CE9DB91A). Well now we need to turn to PDF tools.
+I admit that I&amp;rsquo;m not as well versed with the internal structures of PDF&amp;rsquo;s as I am with Office Documents, but their structure is also simplier. So I first tried PDFStreamDumper by David Zimmer, but it didn&amp;rsquo;t see the javascript intially.</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF Doc 02</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-02/</link>
+      <pubDate>Mon, 15 Aug 2016 13:33:34 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-02/</guid>
+      <description>DOC 01 DOC 02 &amp;lt;- You are here DOC 03 DOC 04 DOC 05  So we solved the frist document and then they give us this&amp;hellip;Document #2 (hash: ACCDF64EB1E96BE5A7C5F23DB6A74B88869E4F6C3B46D41F80B3063BF79AD05E)
+So again, run it through FileId tool and get the VBA code out (using the XML or JSON output options).
+ Sub AutoOpen() &#39; &#39; crackme Macro &#39; &#39; UserForm1.Show End Sub and
+Private Sub button_Click() x = suchcrypto(key.Text, &amp;quot;General Vidal&amp;quot;) If x = &amp;quot;171,184,42,184,88,26,47,154,20,219,203,130,52,19,180,214,156,94,186,74,30,248,119,235,139,130,175,141,179,197,8,204,252,&amp;quot; Then MsgBox &amp;quot;Wow.</description>
+    </item>
+    
+    <item>
+      <title>2016 Palo Alto Labyrenth CTF - Doc 01</title>
+      <link>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-01/</link>
+      <pubDate>Mon, 15 Aug 2016 08:52:00 +0000</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2016-palo-alto-labyrenth-ctf-doc-01/</guid>
+      <description>On 2016-07-15 at 5pm EST Palo Alto Networks started a Capture the Flag competition with cash prizes called PAN Labyrenth CTF. When I looked at the challenges I noticed that there was a Documents track, and since there was a cash prize to the frist person to complete a given track I thought I&amp;rsquo;d give it a go..hey $1000 for a few hours is not bad. It only took me a few hours (actually more than I intended because I got stuck overthinking one of the problems), but I don&amp;rsquo;t think I was the first one to complete the track.</description>
+    </item>
+    
+    <item>
+      <title>Its not VERSUS its PLUS</title>
+      <link>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</link>
+      <pubDate>Wed, 09 Dec 2009 03:28:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-09-its-not-versus-its-plus/</guid>
+      <description>From Schiener on Security - My Reaction to Eric Schmidt:
+Too many wrongly characterize the debate as &amp;ldquo;security versus privacy.&amp;rdquo; The real choice is liberty versus control. Tyranny, whether it arises under threat of foreign physical attack or under constant domestic authoritative scrutiny, is still tyranny. Liberty requires security without intrusion, security plus privacy. Widespread police surveillance is the very definition of a police state. And that&amp;rsquo;s why we should champion privacy even when we have nothing to hide.</description>
+    </item>
+    
+  </channel>
+</rss>

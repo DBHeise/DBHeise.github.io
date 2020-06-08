@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>backup on </title>
+    <link>https://blog.heiseink.com/tags/backup/</link>
+    <description>Recent content in backup on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Dec 2009 13:16:00 -0500</lastBuildDate>
+    
+	<atom:link href="https://blog.heiseink.com/tags/backup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hard Drive Failures</title>
+      <link>https://blog.heiseink.com/posts/2009-12-01-hard-drive-failures/</link>
+      <pubDate>Tue, 01 Dec 2009 13:16:00 -0500</pubDate>
+      
+      <guid>https://blog.heiseink.com/posts/2009-12-01-hard-drive-failures/</guid>
+      <description>So most &amp;ldquo;techies&amp;rdquo; know that all things have a lifespan, electronics especially. So if you&amp;rsquo;re not backing up your data, you will be soon (or loosing that data). My family recently had a 1TB USB external disk fail. Turns out that the &amp;ldquo;disk&amp;rdquo; was actually two 500GB disks RAID&amp;rsquo;ed together. After some investigation it turns out that DISK1 has hardware failures, and DISK2 is fine. But since its RAID&amp;rsquo;ed together none of the data on DISK2 is available.</description>
+    </item>
+    
+  </channel>
+</rss>
