@@ -6,10 +6,41 @@
     <description>Recent content in CrazyDave&#39;s InterTube Emporium on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2020 16:51:45 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2020 10:29:11 -0400</lastBuildDate>
     
 	<atom:link href="https://dbheise.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Being Secure vs Feeling Secure</title>
+      <link>https://dbheise.github.io/posts/2020-07-06-being-secure-vs-feeling-secure/</link>
+      <pubDate>Mon, 06 Jul 2020 10:29:11 -0400</pubDate>
+      
+      <guid>https://dbheise.github.io/posts/2020-07-06-being-secure-vs-feeling-secure/</guid>
+      <description>There is a big difference between &amp;ldquo;Being Secure&amp;rdquo; and &amp;ldquo;Feeling Secure&amp;rdquo;. Far too often even security professionals (financial, physical, computer, or any other) lean towards &amp;ldquo;feeling secure&amp;rdquo; rather than actually &amp;ldquo;being secure&amp;rdquo; because &amp;ldquo;being secure&amp;rdquo; is very very hard, if not impossible.
+Feeling Secure is a feeling in your gut that you&amp;rsquo;ve done all you can think of and covered every base (that you know about). You have used every little trick you know about, even if you don&amp;rsquo;t know how or why it works.</description>
+    </item>
+    
+    <item>
+      <title>Why I wear a mask</title>
+      <link>https://dbheise.github.io/posts/2020-06-22-why-i-wear-a-mask/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 -0400</pubDate>
+      
+      <guid>https://dbheise.github.io/posts/2020-06-22-why-i-wear-a-mask/</guid>
+      <description>I do not wear a face mask because it&amp;rsquo;s the law, because it&amp;rsquo;s not a law it&amp;rsquo;s an executive order&amp;hellip;
+I do not wear a face mask because it keeps me or you safe from this virus, because it does not and there is quite a bit of scientific discussion about the efficacy of the various types of face masks&amp;hellip;
+I do not wear a face mask because someone on TV said so, I don&amp;rsquo;t care what supposed celebrity X says about anything really&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Script for New Golang Web Projects</title>
+      <link>https://dbheise.github.io/posts/2020-06-10-script-for-new-golang-web-projects/</link>
+      <pubDate>Wed, 10 Jun 2020 17:13:06 -0400</pubDate>
+      
+      <guid>https://dbheise.github.io/posts/2020-06-10-script-for-new-golang-web-projects/</guid>
+      <description>Lately several people have been going over how they have their GO projects laid out, so I thought I&amp;rsquo;d join the group. I even went as far as created a powershell script to create the basic structure and initial files for a service/daemon based golang website.
+It ends up with the root folder where you store your shared objects, logging, and config, and then subfolders for different aspects of your project.</description>
+    </item>
     
     <item>
       <title>The solution to all our woes</title>

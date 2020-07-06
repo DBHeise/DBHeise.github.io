@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="Blog">
+    <meta name="dedication" content="קדש ליהוה">
+    <title>
+    
+    
+    
+    </title>
+    
+    <link rel="stylesheet" href="https://dbheise.github.io/main.min.634dc65af451821d063d79318c077f783973353bc7fd10fa9b29eaf1cdd4fb5a.css" integrity="sha256-Y03GWvRRgh0GPXkxjAd/eDlzNTvH/RD6mynq8c3U&#43;1o=">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/"><img src="/images/logo.png" width="128" height="32"></a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            
+            
+                <a class="navbar-item active" href="/posts/" title="">Random Thoughts</a>
+            
+                <a class="navbar-item" href="/projects/" title="">Projects</a>
+            
+                <a class="navbar-item" href="/about/" title="">WhoAmI</a>
+            
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+</nav>
+
+    
+<section class="section">
+  <div class="container">
+    <h1 class="title">Script for New Golang Web Projects</h1>
+    <div class="level">
+      <div class="level-left">
+        
+          
+          <div class="level-item"><span class="tag"><a href="/tags/golang/">golang</a></span></div>
+          
+          <div class="level-item"><span class="tag"><a href="/tags/powershell/">powershell</a></span></div>
+                      
+        
+      </div>
+      <div class="level-right">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Article Date</p>
+            <p>2020 Jun 10</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <p>Lately several people have been going over how they have their <a href="https://golang.org/">GO</a> projects laid out, so I thought I&rsquo;d join the group. I even went as far as created a powershell script to create the basic structure and initial files for a service/daemon based golang website.</p>
+<p>It ends up with the root folder where you store your shared objects, logging, and config, and then subfolders for different aspects of your project. Maybe you have a Data folder that handles your connections to a backend, or whatever module-like organization you might have. The cmd folder has your actual executables, but its starts with only one: Service. I tend to always just run the ctr.ps1 (Compile-Test-Run) whenever I&rsquo;m working on things. I could probably do an entire post on the compile.ps1 script as it has lots of stuff in there</p>
+<p>Its a big script, here&rsquo;s the full download: <a href="/New-GoWebProject.ps1.txt">New-GoWebProject.ps1</a></p>
+<h3 id="golang-dependencies">GOLANG Dependencies</h3>
+<ul>
+<li>This is a full windows service &amp; linux daemon using a library <a href="https://github.com/kardianos/service">Kardianos/Service</a></li>
+<li><a href="https://github.com/labstack/echo">Echo</a> for the website</li>
+<li><a href="https://github.com/rs/zerolog">ZeroLog</a> for logging</li>
+<li><a href="https://github.com/spf13/cobra">Cobra</a> and <a href="https://github.com/spf13/viper">Viper</a> for configuration</li>
+</ul>
+<h3 id="other-dependencies">Other Dependencies</h3>
+<ul>
+<li>SASS compilation using <a href="https://github.com/sass/dart-sass/releases">dart-sass</a></li>
+<li>Minimization (optional) using <a href="https://github.com/tdewolff/minify/cmd/minify">twdewolff/minify</a></li>
+<li>GOHTML template compilation using <a href="https://github.com/DBHeise/StaticGen">StaticGen</a></li>
+<li>On the javascript side of the house it is using vanilla javascript modules</li>
+</ul>
+<p>You will need to modify the compile.ps1 file to point to the correct binaries for dart-sass, minify, and StaticGen.</p>
+<h3 id="semi-simplified-script">Semi-Simplified Script</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">[<span style="color:#66d9ef">CmdletBinding</span>()]
+<span style="color:#66d9ef">param</span>(
+	[<span style="color:#66d9ef">Parameter</span>(<span style="color:#66d9ef">Mandatory</span>=$true)]<span style="color:#66d9ef">[String]</span>$ProjectName,
+    <span style="color:#66d9ef">[int]</span>$Port = 8042,
+    <span style="color:#66d9ef">[String]</span>$BaseFolder = <span style="color:#e6db74">&#34;E:\code&#34;</span>
+)
+
+$serviceName = $ProjectName + <span style="color:#e6db74">&#34;Service&#34;</span>
+$serviceNameShort = $ProjectName.Replace(<span style="color:#e6db74">&#39; &#39;</span>,<span style="color:#e6db74">&#39;&#39;</span>)
+
+
+<span style="color:#75715e">#Make project folders</span>
+$projFolder = Join-Path $BaseFolder $ProjectName
+New-Item -Path $projFolder -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service&#34;</span>) -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts&#34;</span>) -Type Directory -Force | Out-Null
+$staticFolder = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\static&#34;</span>) -Type Directory -Force
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\static\js&#34;</span>) -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\static\img&#34;</span>) -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\sass&#34;</span>) -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\templates&#34;</span>) -Type Directory -Force | Out-Null
+
+$file_config      = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;config.go&#34;</span>) -Type file -Force
+$file_logging     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;logging.go&#34;</span>) -Type file -Force
+$file_gomod       = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;go.mod&#34;</span>) -Type file -Force
+$file_config_json = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\config.json&#34;</span>) -Type file -Force
+$file_install     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\install.go&#34;</span>) -Type file -Force
+$file_main        = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\main.go&#34;</span>) -Type file -Force
+$file_root        = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\root.go&#34;</span>) -Type file -Force
+$file_run         = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\run.go&#34;</span>) -Type file -Force
+$file_service     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\service.go&#34;</span>) -Type file -Force
+$file_uninstall   = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\uninstall.go&#34;</span>) -Type file -Force
+$file_version     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;cmd\Service\version.go&#34;</span>) -Type file -Force
+$file_server      = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\webserver.go&#34;</span>) -Type file -Force
+$file_logger      = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\logger.go&#34;</span>) -Type file -Force
+$file_compile_ps1 = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts\compile.ps1&#34;</span>) -Type file -Force
+$file_test_ps1    = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts\test.ps1&#34;</span>) -Type file -Force
+$file_run_ps1     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts\run.ps1&#34;</span>) -Type file -Force
+$file_ctr_ps1     = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts\ctr.ps1&#34;</span>) -Type file -Force
+$file_buildd      = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;scripts\builddata.json&#34;</span>) -Type file -Force
+$file_main_sass   = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\sass\main.sass&#34;</span>) -Type file -Force
+$file_common_mjs  = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\static\js\common.mjs&#34;</span>) -Type file -Force
+$file_index_mjs   = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\static\js\index.mjs&#34;</span>) -Type file -Force
+$file__doc        = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\templates\_document.gohtml&#34;</span>) -Type file -Force
+$file_index       = New-Item -Path (Join-Path $projFolder <span style="color:#e6db74">&#34;Server\templates\index.gohtml&#34;</span>) -Type file -Force
+
+<span style="color:#75715e">#########################################################################</span>
+<span style="color:#75715e">### REDACTED FILE CONTENTS FOR BREVITY, see download for full details ###</span>
+<span style="color:#75715e">#########################################################################</span>
+
+<span style="color:#75715e">## Now initialize the project</span>
+pushd $projFolder
+
+<span style="color:#75715e"># setup git</span>
+git init | Out-Null
+
+<span style="color:#75715e"># initial commit</span>
+git add * | Out-Null
+git commit -m <span style="color:#e6db74">&#34;initial commit&#34;</span> | Out-Null
+
+<span style="color:#75715e">#do the first build</span>
+. .\scripts\compile.ps1
+
+popd
+
+</code></pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+
+
+</body>
+</html>

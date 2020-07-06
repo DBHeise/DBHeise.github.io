@@ -6,10 +6,20 @@
     <description>Recent content in powershell on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Dec 2009 13:44:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2020 17:13:06 -0400</lastBuildDate>
     
 	<atom:link href="https://dbheise.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Script for New Golang Web Projects</title>
+      <link>https://dbheise.github.io/posts/2020-06-10-script-for-new-golang-web-projects/</link>
+      <pubDate>Wed, 10 Jun 2020 17:13:06 -0400</pubDate>
+      
+      <guid>https://dbheise.github.io/posts/2020-06-10-script-for-new-golang-web-projects/</guid>
+      <description>Lately several people have been going over how they have their GO projects laid out, so I thought I&amp;rsquo;d join the group. I even went as far as created a powershell script to create the basic structure and initial files for a service/daemon based golang website.
+It ends up with the root folder where you store your shared objects, logging, and config, and then subfolders for different aspects of your project.</description>
+    </item>
     
     <item>
       <title>Powershell script to Convert MOV audio files to MP3 using VLC</title>

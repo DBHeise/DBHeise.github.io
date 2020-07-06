@@ -1,0 +1,823 @@
+[CmdletBinding()] 
+param(
+	[Parameter(Mandatory=$true)][String]$ProjectName,
+    [int]$Port = 8042,
+    [String]$BaseFolder = "E:\code"
+)
+
+$serviceName = $ProjectName + "Service"
+$serviceNameShort = $ProjectName.Replace(' ','')
+
+
+#Make project folders
+$projFolder = Join-Path $BaseFolder $ProjectName
+New-Item -Path $projFolder -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder "cmd\Service") -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder "scripts") -Type Directory -Force | Out-Null
+$staticFolder = New-Item -Path (Join-Path $projFolder "Server\static") -Type Directory -Force
+New-Item -Path (Join-Path $projFolder "Server\static\js") -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder "Server\static\img") -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder "Server\sass") -Type Directory -Force | Out-Null
+New-Item -Path (Join-Path $projFolder "Server\templates") -Type Directory -Force | Out-Null
+
+$file_config      = New-Item -Path (Join-Path $projFolder "config.go") -Type file -Force
+$file_logging     = New-Item -Path (Join-Path $projFolder "logging.go") -Type file -Force
+$file_gomod       = New-Item -Path (Join-Path $projFolder "go.mod") -Type file -Force
+$file_config_json = New-Item -Path (Join-Path $projFolder "cmd\Service\config.json") -Type file -Force
+$file_install     = New-Item -Path (Join-Path $projFolder "cmd\Service\install.go") -Type file -Force
+$file_main        = New-Item -Path (Join-Path $projFolder "cmd\Service\main.go") -Type file -Force
+$file_root        = New-Item -Path (Join-Path $projFolder "cmd\Service\root.go") -Type file -Force
+$file_run         = New-Item -Path (Join-Path $projFolder "cmd\Service\run.go") -Type file -Force
+$file_service     = New-Item -Path (Join-Path $projFolder "cmd\Service\service.go") -Type file -Force
+$file_uninstall   = New-Item -Path (Join-Path $projFolder "cmd\Service\uninstall.go") -Type file -Force
+$file_version     = New-Item -Path (Join-Path $projFolder "cmd\Service\version.go") -Type file -Force
+$file_server      = New-Item -Path (Join-Path $projFolder "Server\webserver.go") -Type file -Force
+$file_logger      = New-Item -Path (Join-Path $projFolder "Server\logger.go") -Type file -Force
+$file_compile_ps1 = New-Item -Path (Join-Path $projFolder "scripts\compile.ps1") -Type file -Force
+$file_test_ps1    = New-Item -Path (Join-Path $projFolder "scripts\test.ps1") -Type file -Force
+$file_run_ps1     = New-Item -Path (Join-Path $projFolder "scripts\run.ps1") -Type file -Force
+$file_ctr_ps1     = New-Item -Path (Join-Path $projFolder "scripts\ctr.ps1") -Type file -Force
+$file_buildd      = New-Item -Path (Join-Path $projFolder "scripts\builddata.json") -Type file -Force
+$file_main_sass   = New-Item -Path (Join-Path $projFolder "Server\sass\main.sass") -Type file -Force
+$file_common_mjs  = New-Item -Path (Join-Path $projFolder "Server\static\js\common.mjs") -Type file -Force
+$file_index_mjs   = New-Item -Path (Join-Path $projFolder "Server\static\js\index.mjs") -Type file -Force
+$file__doc        = New-Item -Path (Join-Path $projFolder "Server\templates\_document.gohtml") -Type file -Force
+$file_index       = New-Item -Path (Join-Path $projFolder "Server\templates\index.gohtml") -Type file -Force
+
+@"
+package $ProjectName
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/spf13/viper"
+)
+
+func init() {
+
+	viper.SetDefault("Log.ReportCaller", false)
+	viper.SetDefault("Log.Output", "console")
+	viper.SetDefault("Log.Level", "trace")
+
+	viper.SetDefault("Server.Address", "localhost")
+	viper.SetDefault("Server.Port", $Port)
+	viper.SetDefault("Server.Static", ".\\static")
+	viper.SetDefault("Server.Index", "index.html")
+	viper.SetDefault("Server.Timeouts.Read", 5)
+	viper.SetDefault("Server.Timeouts.Write", 10)
+	viper.SetDefault("Server.Timeouts.Idle", 120)
+	viper.SetDefault("Server.Timeouts.Shutdown", 5)
+}
+
+// InitializeConfig - Setup viper & config
+func InitializeConfig(cfgFile string) {
+	if cfgFile != "" {
+		// Use config file from the flag.
+		viper.SetConfigFile(cfgFile)
+	} else {
+
+		// Find home directory.
+		home, err := homedir.Dir()
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(-1)
+		}
+		viper.AddConfigPath(home)
+
+		currentPath, err := filepath.Abs(".")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(-1)
+		}
+		viper.AddConfigPath(currentPath)
+
+		parentPath, err := filepath.Abs("..")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(-1)
+		}
+		viper.AddConfigPath(parentPath)
+
+		viper.SetConfigName("config.json")
+	}
+
+	viper.AutomaticEnv() // read in environment variables that match
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		//fmt.Println("Using config file:", viper.ConfigFileUsed())
+	} else {
+		panic(err)
+	}
+
+}
+func GenerateDefaultConfig(outfile string) error {
+	return viper.WriteConfigAs(outfile)
+}
+"@ | Out-File -FilePath $file_config -Encoding ascii
+@"
+package $ProjectName
+
+import (
+	"os"
+	"time"
+
+	"github.com/spf13/viper"
+
+	"github.com/rs/zerolog"
+)
+
+// InitializeLogging - Setup the logger
+func InitializeLogger(name string) zerolog.Logger {
+	var log zerolog.Logger
+
+	switch viper.GetString("Log.Output") {
+	case "console":
+		log = zerolog.New(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: time.RFC3339, NoColor: true}).With().Timestamp().Logger()
+	default:
+		file, err := os.OpenFile(viper.GetString("Log.Output"), os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		if err == nil {
+			log = zerolog.New(file).With().Timestamp().Logger()
+		} else {
+			log = zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339, NoColor: true}).With().Timestamp().Logger()
+			log.Warn().Msg("Failed to log to file, using stderr")
+		}
+	}
+
+	logLevel, err := zerolog.ParseLevel(viper.GetString("Log.Level"))
+	if err != nil {
+		logLevel = zerolog.InfoLevel
+	}
+	log = log.Level(logLevel)
+
+	if viper.GetBool("Log.ReportCaller") {
+		log = log.With().Caller().Logger()
+	}
+
+	return log.With().Str("name", name).Logger()
+}
+
+"@ | Out-File -FilePath $file_logging -Encoding ascii
+@"
+module $ProjectName
+
+go 1.12
+require (
+	github.com/rs/zerolog v1.18.0
+	github.com/spf13/viper v1.6.2
+	github.com/spf13/cobra v0.0.7
+	github.com/mitchellh/go-homedir v1.1.0
+	github.com/kardianos/service v1.0.0
+	github.com/labstack/echo/v4 v4.1.16
+)
+
+"@ | Out-File -FilePath $file_gomod -Encoding ascii
+@{Server=@{Static=$staticFolder.FullName}} | ConvertTo-Json -Depth 100 -Compress | Out-File -FilePath $file_config_json -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/spf13/cobra"
+)
+
+func init() {
+	rootCmd.AddCommand(installCmd)
+}
+
+var installCmd = &cobra.Command{
+	Use:   "install",
+	Short: "installs $ProjectName as a service",
+	Run: func(cmd *cobra.Command, args []string) {
+		log.Info().Msg("Installing service")
+		err := s.Install()
+		if err != nil {
+			log.Fatal().Err(err).Msg("Failure during install")
+		} else {
+			log.Info().Msg("$ProjectName Service Installed successfully")
+		}
+	},
+}
+"@ | Out-File -FilePath $file_install -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/rs/zerolog"
+)
+
+var (
+	log zerolog.Logger
+)
+
+func main() {
+	Execute()
+}
+"@ | Out-File -FilePath $file_main -Encoding ascii
+@"
+package main
+
+import (
+	"os"
+	"path"
+
+    "$ProjectName"
+    "$ProjectName/Server"
+
+	"github.com/kardianos/service"
+	"github.com/spf13/cobra"
+)
+
+var (
+	cfgFile   string
+	srvr      *Server.WebServer
+	svcConfig *service.Config
+	svc       *$serviceName
+	s         service.Service
+)
+
+var rootCmd = &cobra.Command{
+	Use:   "$ProjectName",
+	Short: "$ProjectName Service",	
+}
+
+func Execute() {
+	if err := rootCmd.Execute(); err != nil {
+		log.Error().Err(err).Msg("An Unhandled Error Occured!")
+		os.Exit(-1)
+	}
+}
+
+func init() {
+	cobra.OnInitialize(initConfig)
+
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is `$HOME/config.json)")
+}
+
+// initConfig reads in config file and ENV variables if set.
+func initConfig() {
+    srvr = &Server.WebServer{}
+    $ProjectName.InitializeConfig(cfgFile)
+    log = $ProjectName.InitializeLogger("$serviceName")
+
+    srvr.InitializeLog(log)
+    srvr.InitializeWebServer()
+
+	if cfgFile != "" {
+		svcConfig.Arguments = make([]string, 3)
+		svcConfig.Arguments[0] = "--config"
+		svcConfig.Arguments[1] = cfgFile
+		svcConfig.Arguments[2] = "run"
+	}
+
+	ex, _ := os.Executable()
+	folder := path.Dir(ex)
+	svcConfig.WorkingDirectory = folder
+
+	var err error
+	s, err = service.New(svc, svcConfig)
+	if err != nil {
+		log.Fatal().Err(err).Msg("Could not create service")
+	}
+}
+"@ | Out-File -FilePath $file_root -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/spf13/cobra"
+)
+
+func init() {
+	rootCmd.AddCommand(runCmd)
+}
+
+var runCmd = &cobra.Command{
+	Use:   "run",
+	Short: "Runs the $ProjectName Service immediately",
+	Run: func(cmd *cobra.Command, args []string) {
+		err := s.Run()
+		if err != nil {
+			log.Fatal().Err(err).Msg("Failure during run")
+		}
+	},
+}
+"@ | Out-File -FilePath $file_run -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/kardianos/service"
+)
+
+func init() {
+	svcConfig = &service.Config{
+		Name:        "$serviceNameShort",
+		DisplayName: "$ProjectName Web Service",
+		Description: "$ProjectName Web Service",
+	}
+	svc = &$serviceName{}
+}
+
+type $serviceName struct{}
+
+func (ffs *$serviceName) Start(s service.Service) error {
+	log.Trace().Msg("$ProjectName Start")
+	go srvr.StartServer()
+	return nil
+}
+
+func (ffs *$serviceName) Stop(s service.Service) error {
+	log.Trace().Msg("$ProjectName Stop")
+	srvr.StopServer()
+	return nil
+}
+
+"@ | Out-File -FilePath $file_service -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/spf13/cobra"
+)
+
+func init() {
+	rootCmd.AddCommand(uninstallCmd)
+}
+
+var uninstallCmd = &cobra.Command{
+	Use:   "uninstall",
+	Short: "uninstalls $ProjectName as a service",
+	Run: func(cmd *cobra.Command, args []string) {
+		log.Info().Msg("Uninstalling $ProjectName Service")
+		err := s.Uninstall()
+		if err != nil {
+			log.Fatal().Err(err).Msg("Failure during uninstall")
+		} else {
+			log.Info().Msg("$ProjectName Service Uninstalled successfully")
+		}
+	},
+}
+"@ | Out-File -FilePath $file_uninstall -Encoding ascii
+@"
+package main
+
+import (
+	"github.com/spf13/cobra"
+)
+
+var (
+	version   string
+	commit    string
+	builddate string
+)
+
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "gets the version",
+	Run: func(cmd *cobra.Command, args []string) {
+		log.Info().Str("Version", version).Str("Commit", commit).Str("BuildDate", builddate).Msg("Version Information")
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(versionCmd)
+}
+"@ | Out-File -FilePath $file_version -Encoding ascii
+@"
+package Server
+
+import (
+	"context"
+	"net/http"
+	"os"
+	"os/signal"
+	"strconv"
+	"strings"
+	"syscall"
+	"time"
+
+	"github.com/spf13/viper"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"github.com/rs/zerolog"
+
+)
+
+type WebServer struct {
+	log        zerolog.Logger
+	e          *echo.Echo
+	srv        *http.Server
+	srvAddress string
+	srvPort    int
+	quit       chan os.Signal
+}
+
+func (w *WebServer) InitializeLog(newlog zerolog.Logger) {
+	w.log = newlog
+}
+
+func (w *WebServer) InitializeWebServer() {
+
+	w.e = echo.New()
+	w.e.HideBanner = true
+	w.e.HidePort = true
+	w.e.Use(middleware.RequestID())
+	w.e.Use(middleware.Secure())
+	w.e.Use(staticContentType())
+	w.e.Use(middleware.Recover())
+	w.e.Use(w.logingMiddleware())
+
+	//Routes
+	w.log.Trace().Msg("Initializing Routes")
+
+	w.e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Root:   viper.GetString("Server.Static"),
+		Browse: true,
+		Index:  viper.GetString("Server.Index"),
+	}))
+
+	w.srvAddress = viper.GetString("Server.Address")
+	w.srvPort = viper.GetInt("Server.Port")
+
+	w.srv = &http.Server{
+		Addr:         w.srvAddress + ":" + strconv.Itoa(w.srvPort),
+		ReadTimeout:  time.Duration(viper.GetInt("Server.Timeouts.Read")) * time.Second,
+		WriteTimeout: time.Duration(viper.GetInt("Server.Timeouts.Write")) * time.Second,
+		IdleTimeout:  time.Duration(viper.GetInt("Server.Timeouts.Idle")) * time.Second,
+	}
+}
+
+func staticContentType() echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			req := c.Request()
+			if strings.HasSuffix(req.URL.Path, ".js") {
+				c.Response().Header().Set(echo.HeaderContentType, echo.MIMEApplicationJavaScriptCharsetUTF8)
+			}
+			return next(c)
+		}
+	}
+}
+
+func (w *WebServer) StopServer() {
+	w.quit <- syscall.SIGINT
+}
+
+func (w *WebServer) StartServer() {
+	w.log.Trace().Msg("Starting Server")
+
+	// Start server
+	go func() {
+		w.log.Trace().Str("Host", w.srvAddress).Int("Port", w.srvPort).Str("Address", w.srv.Addr).Msg("Starting HTTP Server")
+		if err := w.e.StartServer(w.srv); err != nil {
+			w.log.Fatal().Err(err).Msg("Unable to start web server")
+		}
+	}()
+
+	// Wait for interrupt
+	w.quit = make(chan os.Signal)
+	signal.Notify(w.quit, os.Interrupt)
+	<-w.quit
+
+	// Attempt a graceful shutdown
+	w.log.Trace().Msg("Attempting graceful shutdown")
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(viper.GetInt("Server.Timeouts.Shutdown"))*time.Second)
+	defer func() {
+		w.log.Trace().Msg("Extra Exiting")
+		cancel()
+	}()
+	if err := w.srv.Shutdown(ctx); err != nil {
+		w.log.Panic().Err(err).Msg("Shutdown failed")
+	}
+
+	w.log.Trace().Msg("Server exiting gracefully")
+}
+"@ | Out-File -FilePath $file_server -Encoding ascii
+@"
+package Server
+
+import (
+	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/rs/zerolog"
+)
+
+func (w *WebServer) loghandler(c echo.Context, next echo.HandlerFunc) error {
+	req := c.Request()
+	res := c.Response()
+	start := time.Now()
+	if err := next(c); err != nil {
+		c.Error(err)
+	}
+	stop := time.Now()
+
+	p := req.URL.Path
+	if p == "" {
+		p = "/"
+	}
+
+	bytesIn := req.Header.Get(echo.HeaderContentLength)
+	if bytesIn == "" {
+		bytesIn = "0"
+	}
+
+	d := zerolog.Dict()
+
+	d.Str("time_rfc3339", time.Now().Format(time.RFC3339))
+	d.Str("remote_ip", c.RealIP())
+	d.Str("host", req.Host)
+	d.Str("uri", req.RequestURI)
+	d.Str("method", req.Method)
+	d.Str("path", p)
+	d.Str("referer", req.Referer())
+	d.Str("user_agent", req.UserAgent())
+	d.Int("status", res.Status)
+	d.Int64("latency", stop.Sub(start).Nanoseconds()/1000)
+	d.Str("latency_human", stop.Sub(start).String())
+	d.Str("bytes_in", bytesIn)
+	d.Int64("bytes_out", res.Size)
+
+	w.log.Debug().Dict("HttpRequest", d).Msg("Handled request")
+
+	return nil
+}
+
+func (w *WebServer) logger(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return w.loghandler(c, next)
+	}
+}
+
+func (w *WebServer) logingMiddleware() echo.MiddlewareFunc {
+	return w.logger
+}
+
+"@ | Out-File -FilePath $file_logger -Encoding ascii
+@"
+{"Version":{"Major":0,"Minor":0,"Patch":0,"Build":0},"Timestamp":""}
+"@ | Out-File -FilePath $file_buildd -Encoding ascii
+@"
+###########################
+# Powershell Aliases
+Set-Alias -Name sass -Value "F:\Tools.ext\dev\dart-sass\sass.bat"           #https://github.com/sass/dart-sass/releases for dart release
+Set-Alias -Name StaticGen -Value "C:\dev.public\StaticGen\StaticGen.exe"    #go get github.com/DBHeise/StaticGen
+Set-Alias -Name minify -Value (Join-Path `$env:GOPATH 'bin\minify.exe')     #go get github.com/tdewolff/minify/cmd/minify
+
+
+###########################
+# Folder Variables
+`$scriptFolder = Split-Path -Path `$MyInvocation.MyCommand.Definition -Parent
+`$projectRoot = Split-Path `$scriptFolder
+`$templateFolder = Join-Path `$projectRoot "Server\templates"
+`$sassFolder = Join-Path `$projectRoot "Server\sass"
+`$staticOutFolder= Join-Path `$projectRoot "Server\static"
+`$sassOutFolder = Join-Path `$staticOutFolder "css"
+
+
+###########################
+# File Lists
+`$sassFiles = @(
+    Join-Path -Path `$sassFolder -ChildPath "main.sass"
+)
+`$miniFiles = @(
+)
+
+
+
+###########################
+# Build Information
+`$buildInfoJson = Join-Path `$scriptFolder "builddata.json"
+`$buildData = (Get-Content `$buildInfoJson -raw | ConvertFrom-Json)
+`$buildData.Version.Build += 1
+`$buildData.TimeStamp = [DateTime]::Now.ToString("yyyy-MM-ddTHH:mm:ss.fffffffzzz")
+`$buildData | ConvertTo-Json -Compress | Set-Content `$buildInfoJson -Encoding Ascii
+
+## Update base html
+`$baseFile = (Join-Path `$templateFolder "_document.gohtml")
+`$base = Get-Content `$baseFile -Raw -Encoding UTF8
+`$buildStr = `$buildData.Version.Major.ToString() + "." + `$buildData.Version.Minor.ToString() + "." +  `$buildData.Version.Patch.ToString() + "." +  `$buildData.Version.Build.ToString()
+`$baseUpdated = `$base.Replace("<!-- VERSION -->", '<meta name="version" content="' + `$buildStr + '">')
+`$baseUpdated | Set-Content `$baseFile -Encoding UTF8
+
+
+###########################
+# SASS Compliation
+`$i = 0
+`$sassFiles | ForEach-Object {
+    Write-Progress -Activity "SASS Complilation" -Status `$_ -PercentComplete (`$i++ / `$sassFiles.Length * 100)
+
+    `$in = `$_
+    `$out = Join-Path -Path `$sassOutFolder -ChildPath (Split-Path  `$in -Leaf).Replace('sass','css')
+
+    sass --no-source-map `$in `$out
+    if (`$LASTEXITCODE -ne 0) {
+        exit 123450
+    }
+    `$miniFiles += `$out
+}
+Write-Progress -Activity "SASS Complilation" -Completed
+
+
+###########################
+# Static file Generation
+`$i = 0
+`$htmlFiles = Get-ChildItem (Join-Path `$templateFolder '*.gohtml') -Exclude _*
+`$htmlFiles | ForEach-Object {
+    Write-Progress -Activity "HTML Generation" -Status `$_.Name -PercentComplete (`$i++ / `$htmlFiles.Length * 100)
+
+    `$in = `$_.FullName
+    `$out = Join-Path `$staticOutFolder (`$_.Name.Replace(`$_.Extension, ".html"))
+    `$dataFile = `$_.FullName.Replace(`$_.Extension, ".json")
+    if (Test-Path `$dataFile) {
+        StaticGen -templates `$templateFolder -input `$in -output `$out -data `$dataFile
+    } else {
+        StaticGen -templates `$templateFolder -input `$in -output `$out
+    }
+    
+    if (`$LASTEXITCODE -ne 0) {
+        ## Reset base HTML
+        `$base | Set-Content `$baseFile -Encoding UTF8   
+        exit 123451
+    }
+    `$miniFiles += `$out
+
+}
+## Reset base HTML
+`$base | Set-Content `$baseFile -Encoding UTF8   
+Write-Progress -Activity "HTML Generation" -Completed
+
+
+###########################
+# Minification
+`$i = 0
+`$miniFiles | ForEach-Object {
+    Write-Progress -Activity "Minification" -Status `$_ -PercentComplete (`$i++ / `$miniFiles.Length * 100)
+
+    #`$in = `$_
+    #`$ext = (Get-ChildItem `$in).Extension
+    #`$out = `$in.Replace(`$ext, ".min" + `$ext)
+    #`$out = `$in
+    
+    #minify -o `$out `$in
+    #if (`$LASTEXITCODE -ne 0) {
+    #    exit 123452
+    #}
+}
+Write-Progress -Activity "Minification" -Completed
+
+
+
+###########################
+# Full program compliation
+Write-Progress -Activity "Program Compliation"
+Push-Location -Path (Join-Path `$projectRoot "cmd\Service")
+`$commit = git rev-parse --short HEAD
+`$buildDate = `$buildData.TimeStamp
+`$ldStr = `@"
+-X main.commit="`$commit" -X main.version="`$buildStr" -X main.builddate="`$buildDate"
+`"@
+go build -ldflags "`$ldStr"
+if (`$LASTEXITCODE -ne 0) {
+    exit 123453
+}
+Pop-Location
+Write-Progress -Activity "Program Compliation" -Completed
+"@ | Out-File -FilePath $file_compile_ps1 -Encoding ascii
+@"
+`$scriptFolder = Split-Path -Path `$MyInvocation.MyCommand.Definition -Parent
+
+## Compile
+& `$scriptFolder\compile.ps1
+if (`$LASTEXITCODE -ne 0) {
+    exit
+}
+
+## Test
+& `$scriptFolder\test.ps1
+if (`$LASTEXITCODE -ne 0) {
+    exit
+}
+
+## Run
+& `$scriptFolder\run.ps1 | Format-List
+"@ | Out-File -FilePath $file_ctr_ps1 -Encoding ascii
+@"
+`$scriptFolder = Split-Path -Path `$MyInvocation.MyCommand.Definition -Parent
+`$projectRoot = Split-Path `$scriptFolder
+
+`$workFolder = Join-Path `$projectRoot "cmd\Service"
+Start-Process -FilePath (Join-Path `$workFolder 'Service.exe') -WorkingDirectory `$workFolder -ArgumentList @("run", "--config", (Join-Path `$workFolder "config.json"))
+"@ | Out-File -FilePath $file_run_ps1 -Encoding ascii
+@"
+html
+    min-width: 300px
+    overflow-x: scroll
+    overflow-y: scroll
+body
+    font-size: 1rem
+"@ | Out-File -FilePath $file_main_sass -Encoding ascii
+@"
+`$scriptFolder = Split-Path -Path `$MyInvocation.MyCommand.Definition -Parent
+`$projectRoot = Split-Path `$scriptFolder
+
+Push-Location `$projectRoot
+
+`$results = go test ./... -v -json | ForEach-Object { `$_ | ConvertFrom-Json }
+`$results | Where-Object { `$_.action -in @('fail','pass')} | Sort-Object Package,Test| Format-Table Action,Elapsed,Package,Test -AutoSize | Out-Host
+if (`$results.action -contains 'fail') {
+    exit -1
+}
+
+Pop-Location
+"@ | Out-File -FilePath $file_test_ps1 -Encoding ascii
+@"
+
+export class Page {
+    constructor(name) {
+        this.name = name
+    }
+    onDOMLoad() {}
+    onPageLoad() {}
+}
+
+document.addEventListener("readystatechange", function(ev){
+    let navburger = document.querySelector("nav.navbar a.burger")
+    let navmenu = document.querySelector("nav.navbar div.navbar-menu")
+    navburger.onclick = function(e) {
+        navburger.classList.toggle("is-active")
+        navmenu.classList.toggle("is-active")
+    }
+
+
+    if (ev.target.readyState === "interactive") { //page DOM is loaded
+        for(let i = 0; i < Manager.Pages.length; i++) {
+            Manager.Pages[i].onDOMLoad();
+        }
+    } else if (ev.target.readyState === "complete") { //page sub-components loaded
+        for(let i = 0; i < Manager.Pages.length; i++) {
+            Manager.Pages[i].onPageLoad()
+        }
+    }
+})
+"@ | Out-File -FilePath $file_common_mjs -Encoding ascii
+@"
+import {Page} from './common.mjs'
+
+class IndexPage extends Page {
+
+}
+Manager.Pages.push(new IndexPage("index"))
+"@ | Out-File -FilePath $file_index_mjs -Encoding ascii
+@"
+{{define "Document"}}<!DOCTYPE html>
+<html lang="en">
+<!-- קדש ליהוה -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="$ProjectName">
+    <meta name="dedication" content="קדש ליהוה">
+    <!-- VERSION -->
+    <title>{{template "title" .}}</title>
+    {{template "includes" .}}
+</head>
+<body>    
+    <section>
+        {{template "content" .}}
+    </section>
+</body>
+</html>{{end}}
+"@ | Out-File -FilePath $file__doc -Encoding utf8
+@"
+{{define "title"}}$ProjectName{{end}}
+{{define "includes"}}
+    <script type="module" src="js/index.mjs"></script>{{end}}
+{{define "content"}}
+    <h1>$ProjectName</h1>
+{{end}}{{template "Document" .}}
+"@ | Out-File -FilePath $file_index -Encoding ascii
+
+
+
+## Now initialize the project
+pushd $projFolder
+
+# setup git
+git init | Out-Null
+
+# initial commit
+git add * | Out-Null
+git commit -m "initial commit" | Out-Null
+
+#do the first build
+. .\scripts\compile.ps1
+
+popd
+

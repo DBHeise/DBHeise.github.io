@@ -6,10 +6,20 @@
     <description>Recent content in security on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Aug 2016 15:53:01 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2020 10:29:11 -0400</lastBuildDate>
     
 	<atom:link href="https://dbheise.github.io/tags/security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Being Secure vs Feeling Secure</title>
+      <link>https://dbheise.github.io/posts/2020-07-06-being-secure-vs-feeling-secure/</link>
+      <pubDate>Mon, 06 Jul 2020 10:29:11 -0400</pubDate>
+      
+      <guid>https://dbheise.github.io/posts/2020-07-06-being-secure-vs-feeling-secure/</guid>
+      <description>There is a big difference between &amp;ldquo;Being Secure&amp;rdquo; and &amp;ldquo;Feeling Secure&amp;rdquo;. Far too often even security professionals (financial, physical, computer, or any other) lean towards &amp;ldquo;feeling secure&amp;rdquo; rather than actually &amp;ldquo;being secure&amp;rdquo; because &amp;ldquo;being secure&amp;rdquo; is very very hard, if not impossible.
+Feeling Secure is a feeling in your gut that you&amp;rsquo;ve done all you can think of and covered every base (that you know about). You have used every little trick you know about, even if you don&amp;rsquo;t know how or why it works.</description>
+    </item>
     
     <item>
       <title>2016 Palo Alto Labyrenth CTF Doc 05</title>
